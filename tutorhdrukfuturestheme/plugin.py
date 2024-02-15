@@ -36,8 +36,8 @@ config: t.Dict[str, t.Dict[str, t.Any]] = {
         "FOOTER_LEGAL_LINKS": [
             {"title": "Terms of service", "url": "/tos"},
             {
-                "title": "Indigo theme for Open edX",
-                "url": "https://github.com/overhangio/tutor-indigo",
+                "title": "HDR UK Futures theme for Open edX",
+                "url": "https://github.com/EVT-Digital/tutor-hdrukfuturestheme",
             },
         ],
     },
@@ -47,25 +47,25 @@ config: t.Dict[str, t.Dict[str, t.Any]] = {
 
 # Theme templates
 hooks.Filters.ENV_TEMPLATE_ROOTS.add_item(
-    pkg_resources.resource_filename("tutorindigo", "templates")
+    pkg_resources.resource_filename("tutorhdrukfuturestheme", "templates")
 )
 # This is where the theme is rendered in the openedx build directory
 hooks.Filters.ENV_TEMPLATE_TARGETS.add_items(
     [
-        ("indigo", "build/openedx/themes"),
+        ("hdrukfuturestheme", "build/openedx/themes"),
     ],
 )
 
 # Force the rendering of scss files, even though they are included in a "partials" directory
 hooks.Filters.ENV_PATTERNS_INCLUDE.add_item(
-    r"indigo/lms/static/sass/partials/lms/theme/"
+    r"hdrukfuturestheme/lms/static/sass/partials/lms/theme/"
 )
 
 # init script: set theme automatically
 with open(
     os.path.join(
-        pkg_resources.resource_filename("tutorindigo", "templates"),
-        "indigo",
+        pkg_resources.resource_filename("tutorhdrukfuturestheme", "templates"),
+        "hdrukfuturestheme",
         "tasks",
         "init.sh",
     ),
@@ -75,22 +75,22 @@ with open(
 
 
 # Override openedx & mfe docker image names
-@hooks.Filters.CONFIG_DEFAULTS.add(priority=hooks.priorities.LOW)
-def _override_openedx_docker_image(
-    items: list[tuple[str, t.Any]]
-) -> list[tuple[str, t.Any]]:
-    openedx_image = ""
-    mfe_image = ""
-    for k, v in items:
-        if k == "DOCKER_IMAGE_OPENEDX":
-            openedx_image = v
-        elif k == "MFE_DOCKER_IMAGE":
-            mfe_image = v
-    if openedx_image:
-        items.append(("DOCKER_IMAGE_OPENEDX", f"{openedx_image}-indigo"))
-    if mfe_image:
-        items.append(("MFE_DOCKER_IMAGE", f"{mfe_image}-indigo"))
-    return items
+# @hooks.Filters.CONFIG_DEFAULTS.add(priority=hooks.priorities.LOW)
+# def _override_openedx_docker_image(
+#     items: list[tuple[str, t.Any]]
+# ) -> list[tuple[str, t.Any]]:
+#     openedx_image = ""
+#     mfe_image = ""
+#     for k, v in items:
+#         if k == "DOCKER_IMAGE_OPENEDX":
+#             openedx_image = v
+#         elif k == "MFE_DOCKER_IMAGE":
+#             mfe_image = v
+#     if openedx_image:
+#         items.append(("DOCKER_IMAGE_OPENEDX", f"{openedx_image}-hdrukfuturestheme"))
+#     if mfe_image:
+#         items.append(("MFE_DOCKER_IMAGE", f"{mfe_image}-hdrukfuturestheme"))
+#     return items
 
 
 # Load all configuration entries
