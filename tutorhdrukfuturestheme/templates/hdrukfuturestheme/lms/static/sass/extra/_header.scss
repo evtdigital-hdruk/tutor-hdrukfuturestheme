@@ -18,14 +18,13 @@ header.global-header {
     .header-logo {
         margin: 0;
         a {
-            margin: 15px 0 15px 35px;
+            margin: 0 0 0 35px;
             height: auto;
             @include media-breakpoint-up(lg) {
                 margin: 0;
-                margin: 20px 0 0;
             }
             .logo {
-                height: 21px;
+                height: 65px;
                 margin: 0;
             }
         }

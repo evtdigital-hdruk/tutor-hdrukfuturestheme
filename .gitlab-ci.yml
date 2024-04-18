@@ -1,9 +1,10 @@
 variables:
-    TUTOR_PLUGIN: indigo
+    TUTOR_PLUGIN: hdrukfuturestheme
     TUTOR_EXTRA_ENABLED_PLUGINS: mfe
-    TUTOR_PYPI_PACKAGE: tutor-indigo
+    TUTOR_PYPI_PACKAGE: tutor-hdrukfuturestheme
     TUTOR_IMAGES: openedx mfe
-    GITHUB_REPO: overhangio/tutor-indigo
+    OPENEDX_RELEASE: quince
+    GITHUB_REPO: overhangio/tutor-hdrukfuturestheme
 
 include:
   - project: 'community/tutor-ci'
