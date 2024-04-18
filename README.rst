@@ -1,7 +1,7 @@
 Indigo, a cool blue theme for Open edX
 ======================================
 
-Indigo is an elegant, customizable theme for `Open edX <https://open.edx.org>`__.
+Indigo is an elegant, customizable theme for `Open edX <https://openedx.org>`__.
 
 .. image:: ./screenshots/01-landing-page.png
     :alt: Platform landing page
@@ -29,11 +29,10 @@ Configuration
 - ``INDIGO_WELCOME_MESSAGE`` (default: "The place for all your online learning")
 - ``INDIGO_PRIMARY_COLOR`` (default: "#3b85ff")
 - ``INDIGO_FOOTER_NAV_LINKS`` (default: ``[{"title": "About", "url": "/about"}, {"title": "Contact", "url": "/contact"}]``)
-- ``INDIGO_FOOTER_LEGAL_LINKS`` (default: ``[{"title": "Terms of service", "url": "/tos"}, {"title": "Indigo theme for Open edX", "url": "https://github.com/overhangio/tutor-indigo"}]``)
 
 The ``INDIGO_*`` settings listed above may be modified by running ``tutor config save --set INDIGO_...=...``. For instance, to remove all links from the footer, run::
 
-    tutor config save --set "INDIGO_FOOTER_NAV_LINKS=[]" --set "INDIGO_FOOTER_LEGAL_LINKS=[]"
+    tutor config save --set "INDIGO_FOOTER_NAV_LINKS=[]"
 
 Or, to set the primary color to forest green, run::
 
@@ -80,7 +79,9 @@ The static templates used by Open edX to render those pages are all stored in th
 
     ls tutorindigo/templates/indigo/lms/templates/static_templates"
 
-For instance, edit the "donate.html" file in this directory. We can derive the content of this file from the contents of the `donate.html <https://github.com/edx/edx-platform/blob/open-release/quince.master/lms/templates/static_templates/donate.html>`__ static template in edx-platform::
+For instance, edit the "donate.html" file in this directory. We can derive the content of this file from the contents of the `donate.html <https://github.com/edx/edx-platform/blob/open-release/quince.master/lms/templates/static_templates/donate.html>`__ static template in edx-platform:
+
+.. code-block:: mako
 
     <%page expression_filter="h"/>
     <%! from django.utils.translation import ugettext as _ %>
@@ -103,6 +104,21 @@ This new template will then be used to render the /donate url.
 
 Troubleshooting
 ---------------
+
+Can't override styles using Indigo Theme for MFEs
+-------------------------------------------------
+
+The indigo theme can’t override styles for MFEs directly. It overrides the styles for edx-platform. In case of MFEs, `@edx/brand <https://github.com/openedx/brand-openedx>`_ is used to override the styles. Customize the ``@edx/brand`` package to your preferences and include this customized package in `tutor-indigo` plugin. In this way, styles can be overidden::
+
+
+    hooks.Filters.ENV_PATCHES.add_item((
+                "mfe-dockerfile-post-npm-install",
+                """
+    RUN npm install '@edx/brand@npm:custom-brand-package'
+    RUN npm install '@edx/brand@git+https://github.com/username/brand-openedx.git#custom-branch'
+    """,
+            ))
+
 
 This Tutor plugin is maintained by Hina Khadim from `Edly <https://edly.io>`__. Community support is available from the official `Open edX forum <https://discuss.openedx.org>`__. Do you need help with this plugin? See the `troubleshooting <https://docs.tutor.edly.io/troubleshooting.html>`__ section from the Tutor documentation.
 
