@@ -1,6 +1,6 @@
 // Include custom header
 body {
-    font-family: $font-family-title;
+    font-family: $font-family-sans-serif;
 }
 header.global-header {
     border: none;
@@ -41,11 +41,11 @@ header.global-header {
                     font-weight: 500;
                     line-height: 22px;
                     padding: 20px 0;
-                    color: $light-drak;
+                    color: $light-dark;
                     margin: 0 16px 0 0;
                     border-bottom: 2px solid transparent;
                     &.active, &:hover {
-                        color: $drak;
+                        color: $dark;
                         border-bottom: 2px solid $primary;
                     }
                 }
@@ -98,10 +98,10 @@ header.global-header {
                         padding: 10px;
                         font-size: 14px;
                         line-height: 20px;
-                        color: $light-drak;
+                        color: $light-dark;
                         &:hover {
                             background: $primary-light;
-                            color: $drak;                         ;
+                            color: $dark;                         ;
                         }
                     }
                 }
@@ -139,11 +139,11 @@ header.global-header {
             padding: 16px;
             font-size: 14px;
             line-height: 20px;
-            color: $light-drak;
+            color: $light-dark;
             border: none;
             &:hover, &.active {
                 background: $primary-light;
-                color: $drak;
+                color: $dark;
             }
         }
     }
