@@ -168,8 +168,8 @@
                 display: none;
             }
             .about, .prerequisites, .course-staff, .faq {
-                font: 16px/20px $font-family-title;
-                color: #515661;
+                font: 16px/20px $font-family-sans-serif;
+                color: #6B7280;
                 border-radius: 8px;
                 border: 1px solid $primary-light;
                 border-left: 14px solid $primary-light;
@@ -292,7 +292,7 @@
                     border: none;
                     border-top: 4px solid $primary;
                     color: #000;
-                    font: 10px/15px $font-family-title;
+                    font: 10px/15px $font-family-sans-serif;
                     padding: 10px;
                 }
                 .share {
@@ -329,7 +329,7 @@
                     float: none;
                     color: #4B5563;
                     margin: 0 0 5px;
-                    font-family: $font-family-title;
+                    font-family: $font-family-sans-serif;
                     float: left;
                     @include media-breakpoint-up(md) {
                         float: none;
@@ -345,7 +345,7 @@
                     color: #515661;
                     display: block;
                     font-weight: normal;
-                    font-family: $font-family-title;
+                    font-family: $font-family-sans-serif;
                     float: right;
                     @include media-breakpoint-up(md) {
                         float: none;

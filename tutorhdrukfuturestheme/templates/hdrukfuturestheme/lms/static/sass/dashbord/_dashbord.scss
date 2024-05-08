@@ -171,7 +171,7 @@
                 height: 38px;
                 border-radius: 6px;
                 background: $primary;
-                font-family: $font-family-title;
+                font-family: $font-family-sans-serif;
                 @include media-breakpoint-up(sm) {
                     min-width: 100px;
                 }
@@ -273,7 +273,7 @@
                     display: block;
                     margin: 0;
                     h3 {
-                        font-family: $font-family-title;
+                        font-family: $font-family-sans-serif;
                         height: 72px;
                     }
                     .wrapper-course-info-actions {
@@ -405,7 +405,7 @@
                 padding: 8px 15px;
                 border-radius: 6px;
                 font-weight: 500;
-                font-family: $font-family-title;
+                font-family: $font-family-sans-serif;
             }
             .close-modal{
                 position: static;
