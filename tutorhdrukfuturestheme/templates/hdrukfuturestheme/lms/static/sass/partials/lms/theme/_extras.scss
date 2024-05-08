@@ -42,11 +42,11 @@ input:-webkit-autofill:active{
 }
 
 %t-title {
-  font-family: $font-family-title;
+  font-family: $font-family-sans-serif;
 }
 
 h1, h2, h3, h1 span, h2 span, h3 span, .nav-item {
-  font-family: $font-family-title;
+  font-family: $font-family-sans-serif;
 }
 
 // It is necessary to specify `:not(.courseware) >` in order to not affect the style
