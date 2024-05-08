@@ -28,11 +28,11 @@ body, body.view-profile {
 }
 
 %t-title {
-  font-family: $font-family-title;
+  font-family: $font-family-sans-serif;
 }
 
 h1, h2, h3, h1 span, h2 span, h3 span, .nav-item {
-  font-family: $font-family-title;
+  font-family: $font-family-sans-serif;
 }
 
 // It is necessary to specify `:not(.courseware) >` in order to not affect the style
@@ -264,7 +264,7 @@ nav.wrapper-preview-menu {
       line-height: 34px;
       margin: 0 0 12px;
       text-align: left;
-      color: $drak;
+      color: $dark;
     }
     p {
       margin: 0 0 20px;
@@ -293,5 +293,3 @@ nav.wrapper-preview-menu {
 @import '../../../courseware/about';
 @import '../../../courseware/bookmarks';
 @import '../../../home/home';
-
-
