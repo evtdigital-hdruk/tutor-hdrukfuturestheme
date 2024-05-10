@@ -26,8 +26,6 @@ config: t.Dict[str, t.Dict[str, t.Any]] = {
         # tutor config save --set INDIGO_FOOTER_NAV_LINKS=[]
         "FOOTER_NAV_LINKS": [
             {"title": "About Us", "url": "/about"},
-            {"title": "Blog", "url": "/blog"},
-            {"title": "Donate", "url": "/donate"},
             {"title": "Terms of Sevice", "url": "/tos"},
             {"title": "Privacy Policy", "url": "/privacy"},
             {"title": "Help", "url": "/help"},
@@ -84,9 +82,9 @@ def _override_openedx_docker_image(
         elif k == "MFE_DOCKER_IMAGE":
             mfe_image = v
     if openedx_image:
-        items.append(("DOCKER_IMAGE_OPENEDX", f"{openedx_image}-hdrukfuturestheme"))
+        items.append(("DOCKER_IMAGE_OPENEDX", f"{openedx_image}-indigo"))
     if mfe_image:
-        items.append(("MFE_DOCKER_IMAGE", f"{mfe_image}-hdrukfuturestheme"))
+        items.append(("MFE_DOCKER_IMAGE", f"{mfe_image}-indigo"))
     return items
 
 
@@ -105,7 +103,7 @@ hooks.Filters.ENV_PATCHES.add_items(
         (
             "mfe-dockerfile-post-npm-install-learning",
             """
-RUN npm install '@edx/brand@npm:@edly-io/indigo-brand-openedx@^1.0.0'
+RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdruk/v0.1.0'
 RUN npm install '@edx/frontend-component-header@npm:@edly-io/indigo-frontend-component-header@^1.0.0'
 RUN npm install '@edx/frontend-component-footer@npm:@edly-io/indigo-frontend-component-footer@^1.0.0'
 """,
@@ -113,7 +111,7 @@ RUN npm install '@edx/frontend-component-footer@npm:@edly-io/indigo-frontend-com
         (
             "mfe-dockerfile-post-npm-install-authn",
             """
-RUN npm install '@edx/brand@npm:@edly-io/indigo-brand-openedx@^1.0.0'
+RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdruk/v0.1.0'
 """,
         ),
         # Tutor-Indigo v2.1 targets the styling updations in discussions and learner-dashboard MFE
@@ -121,7 +119,7 @@ RUN npm install '@edx/brand@npm:@edly-io/indigo-brand-openedx@^1.0.0'
         (
             "mfe-dockerfile-post-npm-install-discussions",
             """
-RUN npm install '@edx/brand@npm:@edly-io/indigo-brand-openedx@^1.0.0'
+RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdruk/v0.1.0'
 RUN npm install '@edx/frontend-component-header@npm:@edly-io/indigo-frontend-component-header@^1.0.0'
 RUN npm install '@edx/frontend-component-footer@npm:@edly-io/indigo-frontend-component-footer@^1.0.0'
 """,
@@ -129,7 +127,7 @@ RUN npm install '@edx/frontend-component-footer@npm:@edly-io/indigo-frontend-com
         (
             "mfe-dockerfile-post-npm-install-learner-dashboard",
             """
-RUN npm install '@edx/brand@npm:@edly-io/indigo-brand-openedx@^1.0.0'
+RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdruk/v0.1.0'
 RUN npm install '@edx/frontend-component-footer@npm:@edly-io/indigo-frontend-component-footer@^1.0.0'
 """,
         ),
