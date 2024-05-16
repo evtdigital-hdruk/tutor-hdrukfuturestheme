@@ -29,6 +29,11 @@
       ## which are not technically powered by OpenEdX.
       % if not hide_openedx_link:
       <ul class="logo-list">
+        <li>
+          <a href="https://www.hdruk.ac.uk/" rel="noopener" target="_blank">
+            <img src="https://www.hdruk.ac.uk/wp-content/themes/hdruk/assets/img/logo.svg" alt="${footer['openedx_link']['title']}" width="70" />
+          </a>
+        </li>
         <li>Powered by:</li>
         <li>
           <a href="https://docs.tutor.edly.io" rel="noopener" target="_blank">
@@ -40,6 +45,11 @@
             <img src="${static.url('images/openedx-logo.png')}" alt="${footer['openedx_link']['title']}" width="79" />
           </a>
         </li>
+        <li>
+          <a href="https://evt.digital" rel="noopener" target="_blank">
+            <img src="${static.url('images/evt-logo.png')}" alt="${footer['openedx_link']['title']}" width="65" />
+          </a>
+        </li>
       </ul>
     </div>
     
@@ -48,14 +58,6 @@
           
           <li>
             <a href="/about">About Us</a>
-          </li>
-          
-          <li>
-            <a href="/blog">Blog</a>
-          </li>
-          
-          <li>
-            <a href="/donate">Donate</a>
           </li>
           
           <li>
@@ -70,15 +72,11 @@
             <a href="/help">Help</a>
           </li>
           
-          <li>
-            <a href="/contact">Contact Us</a>
-          </li>
-          
       </ol>
     </nav>
     
   </div>
-  <span class="copyright-site">Copyrights ©${datetime.now().year}. All Rights Reserved.</span>
+  <span class="copyright-site">Copyright ©${datetime.now().year}. All Rights Reserved.</span>
   % endif
     <div class="colophon">
      
@@ -117,6 +115,11 @@
         ## which are not technically powered by OpenEdX.
         % if not hide_openedx_link:
         <ul class="logo-list">
+          <li>
+            <a href="https://www.hdruk.ac.uk/" rel="noopener" target="_blank">
+              <img src="https://www.hdruk.ac.uk/wp-content/themes/hdruk/assets/img/logo.svg" alt="${footer['openedx_link']['title']}" width="70" />
+            </a>
+          </li>
           <li>Powered by:</li>
           <li>
             <a href="https://docs.tutor.edly.io" rel="noopener" target="_blank">
@@ -128,6 +131,11 @@
               <img src="${static.url('images/openedx-logo.png')}" alt="${footer['openedx_link']['title']}" width="79" />
             </a>
           </li>
+          <li>
+            <a href="https://evt.digital" rel="noopener" target="_blank">
+              <img src="${static.url('images/evt-logo.png')}" alt="${footer['openedx_link']['title']}" width="65" />
+            </a>
+          </li>
         </ul>
       </div>
       
@@ -137,15 +145,6 @@
             <li>
               <a href="/about">About Us</a>
             </li>
-            
-            <li>
-              <a href="/blog">Blog</a>
-            </li>
-            
-            <li>
-              <a href="/donate">Donate</a>
-            </li>
-            
             <li>
               <a href="/tos">Terms of Sevice</a>
             </li>
@@ -157,16 +156,11 @@
             <li>
               <a href="/help">Help</a>
             </li>
-            
-            <li>
-              <a href="/contact">Contact Us</a>
-            </li>
-            
-        </ol>
+            </ol>
       </nav>
       
     </div>
-    <span class="copyright-site">Copyrights ©${datetime.now().year}. All Rights Reserved.</span>
+    <span class="copyright-site">Copyright ©${datetime.now().year}. All Rights Reserved.</span>
     % endif
       <div class="colophon">
        
