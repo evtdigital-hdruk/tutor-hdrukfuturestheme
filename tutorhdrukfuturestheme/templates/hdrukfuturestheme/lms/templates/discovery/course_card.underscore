@@ -14,9 +14,16 @@
         </header>
         <section class="course-info" aria-hidden="true">
             <h2 class="course-name">
-                <span class="course-code"><%- content.number %></span>
                 <span class="course-title"><%- content.display_name %></span>
                 <span class="course-organization"><%- org %></span>
+                <% if (course_type == "video") { %>
+                <span class="course-type">Video</span>
+                <% } else if (course_type == "selfPaced") { %>
+                <span class="course-type">Self Paced</span>
+                <% } else if (course_type == "blended") { %>
+                <span class="course-type">Blended</span>
+                <% } %>
+
             </h2>
             <a href="/courses/<%- course %>/about" class="learn-more"><%- gettext("Learn More") %></a>
             <div class="course-date" aria-hidden="true">
