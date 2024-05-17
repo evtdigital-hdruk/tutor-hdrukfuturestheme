@@ -89,10 +89,16 @@ from datetime import date
             <a href="${course_target}">
           %endif
 
-          <span class="register disabled">${_("Already Enrolled")}</span>
-
           %if show_courseware_link:
-            <strong>${_("View Course")}</strong>
+            <strong>
+              %if course.course_type =='video':
+              ${_("Watch Video")}
+              %elif course.course_type =='webinar':
+              ${_("Watch Webinar")}
+              %else:
+              ${_("View Course")}
+              %endif
+            </strong>
             </a>
           %endif
 
@@ -245,7 +251,12 @@ from datetime import date
               <span class="important-dates-item-text">${course_price}</span>
             </li>
           %endif
-
+          % if len(course.certificates) > 0:
+          <li class="important-dates-item">
+            <span class="icon fa fa-certificate" aria-hidden="true"></span>
+            <p class="important-dates-item-title">${_("Verified Certificate Available")}</p>
+          </li>
+          % endif
           
 
           % if pre_requisite_courses:
@@ -271,6 +282,7 @@ from datetime import date
         </ol>
         </%block>
         <%include file="course_about_sidebar_header.html" />
+
         % if course.instructor_info['instructors']:
         <div class="course-instructors">
           <h2> Course Instructors </h2>
