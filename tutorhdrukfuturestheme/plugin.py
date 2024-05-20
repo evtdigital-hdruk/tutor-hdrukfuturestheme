@@ -104,6 +104,7 @@ hooks.Filters.ENV_PATCHES.add_items(
             "mfe-dockerfile-post-npm-install-learning",
             """
 RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdruk/v0.1.0'
+RUN npm install '@edx/frontend-component-footer@git+https://github.com/evtdigital-hdruk/frontend-component-footer.git#hdruk/v0.1.0'
 """,
         ),
         (
@@ -124,11 +125,6 @@ RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.
             "mfe-dockerfile-post-npm-install-learner-dashboard",
             """
 RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdruk/v0.1.0'
-""",
-        ),
-        (
-            "mfe-dockerfile-post-npm-install",
-            """
 RUN npm install '@edx/frontend-component-footer@git+https://github.com/evtdigital-hdruk/frontend-component-footer.git#hdruk/v0.1.0'
 """,
         ),
