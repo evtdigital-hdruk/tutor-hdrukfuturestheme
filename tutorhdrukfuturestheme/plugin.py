@@ -200,5 +200,11 @@ MFE_CONFIG['INDIGO_ENABLE_DARK_TOGGLE'] = {{ INDIGO_ENABLE_DARK_TOGGLE }}
 MFE_CONFIG['INDIGO_ENABLE_DARK_TOGGLE'] = {{ INDIGO_ENABLE_DARK_TOGGLE }}
 """,
         ),
+        (
+            "mfe-dockerfile-post-npm-install",
+            """
+RUN npm install '@edx/frontend-component-footer@git+https://github.com/evtdigital-hdruk/frontend-component-footer.git#hdruk/v0.1.0'
+""",
+        ),
     ]
 )
