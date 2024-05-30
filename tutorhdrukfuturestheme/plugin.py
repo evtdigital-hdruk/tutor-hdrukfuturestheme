@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import os
+from glob import glob
+
 import typing as t
 
 import importlib_resources
@@ -98,6 +100,16 @@ hooks.Filters.CONFIG_UNIQUE.add_items(
     [(f"INDIGO_{key}", value) for key, value in config["unique"].items()]
 )
 hooks.Filters.CONFIG_OVERRIDES.add_items(list(config["overrides"].items()))
+
+########################################
+# PATCH LOADING
+########################################
+
+# For each file in tutorhdrukfuturestheme/patches,
+# apply a patch based on the file's name and contents.
+for path in glob(str(importlib_resources.files("tutorhdrukfuturestheme") / "patches" / "*")):
+    with open(path, encoding="utf-8") as patch_file:
+        hooks.Filters.ENV_PATCHES.add_item((os.path.basename(path), patch_file.read()))
 
 
 hooks.Filters.ENV_PATCHES.add_items(
