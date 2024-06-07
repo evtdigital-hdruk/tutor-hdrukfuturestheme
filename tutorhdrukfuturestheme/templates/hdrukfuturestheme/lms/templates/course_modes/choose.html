@@ -26,6 +26,8 @@ from openedx.core.djangolib.markup import HTML, Text
             }
         };
 
+        var showAccountActivationPopup;
+
         $(document).ready(function() {
             $('.expandable-area').slideUp();
             $('.is-expandable').addClass('is-ready');
@@ -48,6 +50,28 @@ from openedx.core.djangolib.markup import HTML, Text
                 encodeURIComponent('${sku | n, js_escaped_string}');
             });
             % endif
+
+            // Check for 'show-account-activation-popup' cookie and show popup if set to True
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+            var showAccountActivationPopup = getCookie('show-account-activation-popup');
+            if (showAccountActivationPopup === 'True') {
+                $('body').addClass('body-hide-overflow-popup');
+                $('#account-activation-popup').show();
+            }
         });
     </script>
 </%block>
@@ -71,7 +95,24 @@ from openedx.core.djangolib.markup import HTML, Text
         <section class="wrapper">
             <div class="wrapper-register-choose wrapper-content-main">
                 <article class="register-choose content-main">
-
+                    <div id="account-activation-popup" data-focus-lock-disabled="false" class="pgn__modal-layer">
+                        <div class="pgn__modal-content-container">
+                            <div class="pgn__modal-backdrop"></div>
+                            <div role="dialog" aria-label="Confirm your email" class="pgn__modal pgn__modal-md pgn__modal-default pgn__alert-modal">
+                                <div class="pgn__modal-header">
+                                    <h2 class="pgn__modal-title">Confirm your email</h2>
+                                </div>
+                                <div class="pgn__modal-body pgn__modal-body-scroll-top pgn__modal-body-scroll-bottom">
+                                    <div></div>
+                                    <div class="pgn__modal-body-content">
+                                        <div>We've sent you an email to verify your account. Please check your inbox to confirm and keep learning.</div>
+                                    </div>
+                                    <div></div>
+                                </div>
+                                <div class="pgn__modal-footer"><button type="button" class="btn btn-danger"><a href="/">Return to dashboard</a></button></div>
+                            </div>
+                        </div>
+                    </div>
                     <form class="form-register-choose" method="post" name="enrollment_mode_form" id="enrollment_mode_form">
                         <%
                         b_tag_kwargs = {'b_start': HTML('<b>'), 'b_end': HTML('</b>')}
