@@ -1,0 +1,2 @@
+MFE_CONFIG["TOS_LINK"] = "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}/tos"
+MFE_CONFIG["SUPPORT_URL"]='{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}/help'
