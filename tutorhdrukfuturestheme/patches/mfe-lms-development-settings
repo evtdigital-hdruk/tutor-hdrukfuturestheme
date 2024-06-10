@@ -1,1 +1,2 @@
+MFE_CONFIG["TOS_LINK"] = "http://{{LMS_HOST}}:8000/tos"
 MFE_CONFIG["SUPPORT_URL"]='http://{{ LMS_HOST }}:8000/help'
