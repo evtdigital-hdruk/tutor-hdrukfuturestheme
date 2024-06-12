@@ -350,13 +350,16 @@
 
         .instructor-bio-container {
             margin-bottom: 10px;
+
             .full-bio {
                 display: none;
             }
+
             .read-more {
                 color: blue;
                 cursor: pointer;
             }
+
             .read-less {
                 color: blue;
                 cursor: pointer;
@@ -369,6 +372,7 @@
                 font-size: 14px;
                 font-weight: 700;
                 letter-spacing: normal;
+
                 a {
                     color: #ffffff;
                     text-decoration: none;
@@ -531,6 +535,8 @@
                         height: auto;
                         width: 50px;
                         border-radius: 25px;
+                        object-fit: cover;
+                        aspect-ratio: 1/1;
                     }
                 }
 
@@ -661,9 +667,11 @@ body.indigo-dark-theme {
                         h2 {
                             height: auto;
                         }
+
                         .course-title {
                             line-height: 16px;
                         }
+
                         .learn-more {
                             margin: 0 0 10px;
                         }
