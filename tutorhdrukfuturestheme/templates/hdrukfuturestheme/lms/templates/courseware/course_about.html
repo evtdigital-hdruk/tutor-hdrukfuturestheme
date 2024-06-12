@@ -56,12 +56,14 @@ def truncate_bio(bio, length=100):
     });
 
     $('.read-more').click(function() {
-      $('.truncated-bio').hide();
-      $('.full-bio').show();
+      var container = $(this).closest('.instructor-bio-container');
+      container.find('.truncated-bio').hide();
+      container.find('.full-bio').show();
     });
     $('.read-less').click(function() {
-      $('.truncated-bio').show();
-      $('.full-bio').hide();
+      var container = $(this).closest('.instructor-bio-container');
+      container.find('.truncated-bio').show();
+      container.find('.full-bio').hide();
     });
 
   })(this)
@@ -311,29 +313,31 @@ def truncate_bio(bio, length=100):
             return words[0].lower() + ''.join(word.capitalize() for word in words[1:])
           instructorNameCamelCase = to_camel_case(instructor['name'])
           %>
-          <div class="instructor-card">
-            <div class="instructor-card-avatar">
-              <img src="${ instructor['image'] }" alt="${ instructor['name'] }">
+          <div class="course-instructor">
+            <div class="instructor-card">
+              <div class="instructor-card-avatar">
+                <img src="${ instructor['image'] }" alt="${ instructor['name'] }">
+              </div>
+              <div class="instructor-card-title">
+                <h3>${ instructor['name'] }</h3>
+                <h4>${ instructor['title'] } ${ (instructor['title'] and instructor['organization']) and '-'} ${ instructor['organization'] }</h4>
+              </div>
             </div>
-            <div class="instructor-card-title">
-              <h3>${ instructor['name'] }</h3>
-              <h4>${ instructor['title'] } - ${ instructor['organization'] }</h4>
+            <div class="instructor-bio-container">
+              <p class="truncated-bio">${truncate_bio(instructor['bio'])}
+              <span class="read-more">Read more</span>
+              </p>
+              <p class="full-bio">${instructor['bio']}
+              <span class="read-less">Read less</span>
+              </p>
             </div>
-          </div>
-          <div class="instructor-bio-container">
-            <p class="truncated-bio">${truncate_bio(instructor['bio'])}
-            <span class="read-more">Read more</span>
-            </p>
-            <p class="full-bio">${instructor['bio']}
-            <span class="read-less">Read less</span>
-            </p>
-          </div>
-          <div class="instructor-view-more-courses">
-            <button>
-              <a href="/courses?type=instructor_info&query=${ instructorNameCamelCase }&name=${ instructor['name'] }">
-                More courses by ${ instructor['name'] }
-              </a>
-            </button>
+            <div class="instructor-view-more-courses">
+              <button>
+                <a href="/courses?type=instructor_info&query=${ instructorNameCamelCase }&name=${ instructor['name'] }">
+                  More courses by ${ instructor['name'] }
+                </a>
+              </button>
+            </div>
           </div>
           % endfor
         </div>  

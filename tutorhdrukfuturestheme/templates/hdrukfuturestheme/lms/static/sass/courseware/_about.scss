@@ -338,13 +338,16 @@
 
         .instructor-bio-container {
             margin-bottom: 10px;
+
             .full-bio {
                 display: none;
             }
+
             .read-more {
                 color: blue;
                 cursor: pointer;
             }
+
             .read-less {
                 color: blue;
                 cursor: pointer;
@@ -357,6 +360,7 @@
                 font-size: 14px;
                 font-weight: 700;
                 letter-spacing: normal;
+
                 a {
                     color: #ffffff;
                     text-decoration: none;
@@ -505,6 +509,10 @@
                 line-height: 20px;
             }
 
+            .course-instructor {
+                margin-bottom: 20px;
+            }
+
             .instructor-card {
                 display: flex;
                 margin: 0 12px 12px 0;
@@ -517,6 +525,8 @@
                         height: auto;
                         width: 50px;
                         border-radius: 25px;
+                        object-fit: cover;
+                        aspect-ratio: 1/1;
                     }
                 }
 
@@ -555,9 +565,11 @@
                         h2 {
                             height: auto;
                         }
+
                         .course-title {
                             line-height: 16px;
                         }
+
                         .learn-more {
                             margin: 0 0 10px;
                         }
