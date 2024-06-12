@@ -347,6 +347,34 @@
                 }
             }
         }
+
+        .instructor-bio-container {
+            margin-bottom: 10px;
+            .full-bio {
+                display: none;
+            }
+            .read-more {
+                color: blue;
+                cursor: pointer;
+            }
+            .read-less {
+                color: blue;
+                cursor: pointer;
+            }
+        }
+
+        .instructor-view-more-courses {
+            button {
+                text-align: left;
+                font-size: 14px;
+                font-weight: 700;
+                letter-spacing: normal;
+                a {
+                    color: #ffffff;
+                    text-decoration: none;
+                }
+            }
+        }
     }
 
     .course-sidebar {
