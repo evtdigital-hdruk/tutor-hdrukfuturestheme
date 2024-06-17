@@ -1,0 +1,21 @@
+#ot-sdk-btn.ot-sdk-show-settings,
+#ot-sdk-btn.optanon-show-settings {
+  color: #29235C!important;
+  background: #ffffff!important;
+  border: 1px solid #29235c!important;
+  width: fit-content;
+  line-height: 20px;
+  padding: 9px 17px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  display: block;
+}
+
+#ot-sdk-btn.ot-sdk-show-settings:hover,
+#ot-sdk-btn.optanon-show-settings:hover {
+  color: #ffffff!important;
+  background: #29235C!important;
+}
