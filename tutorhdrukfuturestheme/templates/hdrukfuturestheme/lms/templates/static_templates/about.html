@@ -1,21 +1,37 @@
-<%namespace name='static' file='../static_content.html'/>
-<%page expression_filter="h"/>
+<%namespace name='static' file='../static_content.html' />
+<%page expression_filter="h" />
 <%! from django.utils.translation import gettext as _ %>
-<%inherit file="../main.html" />
+    <%inherit file="../main.html" />
 
-<%block name="pagetitle">${_("About")}</%block>
+    <%block name="pagetitle">${_("About Us")}</%block>
 
-<main id="main" aria-label="Content" tabindex="-1">
-    <section class="container about">
-        <h1>
-            <%block name="pageheader">${page_header or _("About")}</%block>
-        </h1>
-        <p>
-            <%block name="pagecontent">${page_content or _("Details about Futures and the Capacity Building team to go here.")}</%block>
-        </p>
-        <!-- NEW IN INDIGO: add graphic image -->
-        <div class="graphic-img">
-            <img src="${static.url('images/about.svg')}" alt="Runs on Tutor" />
-        </div>
-    </section>
-</main>
+    <main id="main" aria-label="Content" tabindex="-1">
+        <section class="container about static-content">
+            <h1>
+                <%block name="pageheader">${page_header or _("Learn with HDR UK Futures")}</%block>
+            </h1>
+            <h2>Why learn with Futures?</h2>
+            <ul>
+                <li>Flexible - Learn at your own pace, whenever, wherever.</li>
+                <li>Freely Available - Most of the content on Futures is completely free to access.</li>
+                <li>Learn from Experts - All of our courses and events are created and taught by experts in health data
+                    science.</li>
+                <li>Improve your CV - Gain valuable skills for using healthcare data to level-up your career.</li>
+                <li>Keep Up-to-Date - With our CPD-accredited courses you can keep your academic and practical
+                    qualifications up-to-date.</li>
+                <li>Access to Events - Attend events run by thought leaders from the NHS, industry and world&#8209;class
+                    universities.</li>
+            </ul>
+            <h2>HDR UK</h2>
+            <p>We are the UK's national institute for health data science. We are uniting the UK&#8217;s health data to
+                enable discoveries that improve people&#8217;s lives. Our vision is that every health and care
+                interaction and research endeavour will be enhanced by access to large scale data and advanced
+                analytics. <a href="https://www.hdruk.ac.uk/about-us/">Learn more.</a></p>
+            <h2>About the Training Team</h2>
+            <p>We provide training and learning opportunities to develop health data scientists with the cutting edge
+                skills for careers at the forefront of a rapidly evolving sector.</p>
+            <p>Our emphasis is on training with a clear, immediate impact and on creating a diverse and representative
+                workforce. <a href="https://www.hdruk.ac.uk/study-and-train/about-the-training-team/">Learn more.</a>
+            </p>
+        </section>
+    </main>
