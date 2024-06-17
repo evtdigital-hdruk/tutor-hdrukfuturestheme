@@ -6,16 +6,12 @@
 <%block name="pagetitle">${_("Help")}</%block>
 
 <main id="main" aria-label="Content" tabindex="-1">
-    <section class="container about">
+    <section class="container about static-content">
         <h1>
             <%block name="pageheader">${page_header or _("Help")}</%block>
         </h1>
         <p>
-            <%block name="pagecontent">${page_content or _("Add the learn inbox details, and a mailto link with subject etc.")}</%block>
+            If you have any questions about our courses, or you are having difficulties accessing Futures, please <a href="mailto:learn@hdruk.ac.uk">contact the Training Team.</a>
         </p>
-        <!-- NEW IN INDIGO: add graphic image -->
-        <div class="graphic-img">
-            <img src="${static.url('images/help.svg')}" alt="Runs on Tutor" />
-        </div>
     </section>
 </main>
