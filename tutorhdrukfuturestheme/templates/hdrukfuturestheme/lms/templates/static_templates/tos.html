@@ -1,21 +1,216 @@
-<%namespace name='static' file='../static_content.html'/>
-<%page expression_filter="h"/>
+<%namespace name='static' file='../static_content.html' />
+<%page expression_filter="h" />
 <%! from django.utils.translation import gettext as _ %>
-<%inherit file="../main.html" />
+    <%inherit file="../main.html" />
 
-<%block name="pagetitle">${_("Terms of Service")}</%block>
+    <%block name="pagetitle">${_("Terms of Service")}</%block>
 
-<main id="main" aria-label="Content" tabindex="-1">
-    <section class="container about">
-        <h1>
-            <%block name="pageheader">${page_header or _("Terms of Service")}</%block>
-        </h1>
-        <p>
-            <%block name="pagecontent">${page_content or _("Terms of Service will go here once finalised.")}</%block>
-        </p>
-        <!-- NEW IN INDIGO: add graphic image -->
-        <div class="graphic-img">
-            <img src="${static.url('images/tos.svg')}" alt="Runs on Tutor" />
-        </div>
-    </section>
-</main>
+    <main id="main" aria-label="Content" tabindex="-1">
+        <section class="container about static-content">
+            <h1>
+                <%block name="pageheader">${page_header or _("Terms of Service")}</%block>
+            </h1>
+            <h2>HDR UK Futures</h2>
+            <p>Welcome to HDR UK Futures, an online education platform that provides users with access to a wide range
+                of health data science-related courses and educational materials (the “Site”) operated by Health Data
+                Research UK (“HDR UK”).</p>
+            <p>HDR UK is a limited company registered in England and Wales under company number 10887014 and a charity
+                registered with the Charity Commission under charity number 1194431 with its registered office at 215
+                Euston Road, London, England NE1 2BE.</p>
+            <p>To contact us, please use the following contact details: <a
+                    href="mailto:enquiries@hdruk.ac.uk">enquiries@hdruk.ac.uk</a></p>
+            <h2>Acceptance of Terms and Conditions of Use</h2>
+            <p>By accessing or using the Site, you agree to be bound by these Terms and Conditions of Use (the “Terms”).
+                If you do not agree to all of these Terms, you must not use the Site.</p>
+            <p>The following additional policies also apply to your use of the Site:</p>
+            <ul>
+                <li>Privacy Policy, which sets out how we will use your personal data.</li>
+                <li>Cookie Policy, which sets out information about the cookies on our site.</li>
+            </ul>
+
+            <h2>Modification of the Terms</h2>
+            <p>HDR UK reserves the right, at our discretion, to change, modify, add or remove portions of these Terms at
+                any time. Changes will be communicated to you either via the Site or via email. Your continued use of
+                the Site constitutes your acceptance of the changes to the Terms. If you do not agree to the changes,
+                you must not continue to use the Site.</p>
+
+            <h2>Account Registration and Security</h2>
+            <p>To access certain features of the Site, you must register to create an account ("Account"). During the
+                registration process, you will be required to provide certain information and you will establish a
+                username and a password. You agree to provide accurate, current, and complete information during the
+                registration process and to update such information to keep it accurate, current, and complete.</p>
+            <p>You are responsible for safeguarding your login details. You must not disclose your Account login details
+                to any third party and you take sole responsibility for any activities or actions under your Account.
+                You will inform HDR UK promptly upon becoming aware of any actual or suspected unauthorised access to
+                your Account.</p>
+            <p>HDR UK has the right to disable your Account at any time if, in our reasonable opinion, you have failed
+                to comply with any of these Terms.</p>
+
+            <h2>Access and Use of the Site</h2>
+            <p>The Site is intended solely for users who are 18 years of age or older. Any access to or use of the Site
+                by anyone under 18 is expressly prohibited.</p>
+            <p>The Site and its entire contents, features, and functionality (including but not limited to all
+                information, software, text, displays, images, video, and audio, and the design, selection, and
+                arrangement thereof) are owned by HDR UK or its licensors.</p>
+            <p>Subject to these Terms, HDR UK grants you a non-transferable, non-exclusive right to access and use the
+                Site for your personal and non-commercial purposes.</p>
+            <p>HDR UK reserves the right at any time and from time to time to modify, suspend, or discontinue
+                temporarily or permanently the Site (or any part thereof) with or without notice. HDR UK will not be
+                liable to you or to any third party for any modification, suspension, or discontinuance of the Site.</p>
+
+            <h2>Prohibited Uses</h2>
+            <p>You must not take any action that imposes or may impose an unreasonable or disproportionately large load
+                on the Site or its third-party providers&#8217; infrastructure; interfere or attempt to interfere with
+                the proper working of the Site or any activities conducted on the Site; or bypass any measures HDR UK
+                may use to prevent or restrict access to the Site or parts thereof.</p>
+            <p>You must not misuse the Site by knowingly introducing any material that contains viruses, Trojan horses,
+                worms, logic bombs, time-bombs, keystroke loggers, spyware, adware, or other harmful programs or
+                material that is malicious or technologically harmful. You must not attempt to gain unauthorised access
+                to the site, the server on which the Site is stored, or any server, computer, or database connected to
+                the Site. You must not attack the Site via a denial-of-service attack or a distributed denial-of-service
+                attack. By breaching this provision, you would commit a criminal offence under the Computer Misuse Act
+                1990. We will report any breach to the relevant law enforcement authorities and we will co-operate with
+                those authorities by disclosing your identity to them. In the event of such a breach, your right to use
+                the Site will cease immediately.</p>
+            <p>You agree to use the Site only for lawful purposes and in a way that does not infringe the rights of,
+                restrict, or inhibit anyone else's use and enjoyment of the Site. Prohibited behaviour includes
+                harassing or causing distress or inconvenience to any other user, transmitting obscene or offensive
+                content, or disrupting the normal flow of dialogue within our Site.</p>
+            <p>You must not reproduce, distribute, modify, disassemble, decompile, reverse engineer, create derivative
+                works of, publicly display, publicly perform, republish, download, store, or transmit any of the
+                material on our Site except as follows:</p>
+            <ul>
+                <li>Your computer may temporarily store copies of such materials in RAM incidental to your accessing and
+                    viewing those materials.</li>
+                <li>You may store files that are automatically cached by your Web browser for display enhancement
+                    purposes.</li>
+                <li>You may print or download one copy of a reasonable number of pages of the Site for your own
+                    personal, non-commercial use.</li>
+            </ul>
+            <p>You must not engage in any activity that would dishonestly improve your results or improve or hurt the
+                results of other users in relation to any Courses.</p>
+
+            <h2>Course Enrolment Access and Certificates</h2>
+            <p>HDR UK Futures offers users the opportunity to enrol in online courses ("Courses"). Courses may have
+                additional rules and policies which will be communicated via the Site. You agree to comply with all the
+                rules and policies applicable to such Courses. You acknowledge that these rules and policies may change
+                at any time.</p>
+            <p>Some Courses may be available for free while others may require payment of a fee. The fees for Courses
+                that require payment will be set out on the Site. All fees are non-refundable and non-transferable
+                except as expressly provided in these Terms.</p>
+            <p>Some courses may offer a certificate upon completion (“Certificate(s)”) subject to payment of a fee and
+                successful completion of the course requirements. All fees paid for Certificates are non-refundable
+                except as required under applicable consumer law. Prices for courses and Certificates are subject to
+                change at any time but changes will not affect any order for a course or Certificate you have already
+                placed.</p>
+
+            <h2>User Content</h2>
+            <p>The Site may allow you to upload, submit, store, or send content and data ("User Content"). You retain
+                ownership of any intellectual property rights that you hold in the User Content. You warrant that you
+                have the necessary rights, licences, consents, and/or permissions to reproduce and publish your User
+                Content and that it will not infringe on any third-party rights.</p>
+            <p>You agree to give HDR UK (and our sub-licensees and sub-contractors) a non-exclusive, perpetual,
+                transferable, assignable, worldwide, irrevocable license to use, host, store, modify, create derivative
+                works (such as those resulting from translations, adaptations, or other changes we make so that your
+                content works better with the Site), communicate, publish, perform, display, reproduce, and distribute
+                and otherwise use such User Content in whole or in part in any form and in any media formats. The rights
+                you grant in this license are for the limited purpose of operating, promoting, and improving the Site.
+            </p>
+            <p>You are solely responsible for the User Content you upload, submit, or send on the Site. HDR UK reserves
+                the right to block, remove, and/or permanently delete your User Content for any reason.</p>
+
+            <h2>Termination</h2>
+            <p>You agree that HDR UK, in its sole discretion, may suspend or terminate your Account or use of the Site
+                and remove and discard any User Content within the Site for any reason, including without limitation for
+                lack of use or if HDR UK believes that you have not complied with these Terms. Such suspension or
+                termination may occur without prior notice although HDR UK will endeavour to provide notice where
+                feasible. Upon termination, your right to use the Site will immediately cease.</p>
+            <p>Upon termination, HDR UK reserves the right to delete or archive your Account, including all related
+                information and files in the Account, User Content, and/or prevent any further access to such files or
+                the Site. HDR UK will not be liable to you or any third-party for any suspension or termination of your
+                access to the Site nor for deletion of your data or User Content.</p>
+
+            <h2>Payments Cancellations and Refunds</h2>
+            <p>If you choose to enrol on a course with a fee, purchase a Certificate or any other paid service on the
+                Site, you will be required to pay the fee indicated for that service. All fees are in Great British
+                Pounds unless otherwise stated and are payable via Stripe or PayPal, our payment processing services. By
+                making a payment, you agree to provide accurate and complete information for billing and confirm that
+                you are authorized to use the payment method provided and agree to comply with the chosen payment
+                processing service&#8217;s terms of use:</p>
+            <ul>
+                <li>For Stripe: <a href="https://stripe.com/legal/end-users">End User Terms of Service</a>.</li>
+                <li>For PayPal: <a href="https://www.paypal.com/us/webapps/mpp/ua/useragreement-full">PayPal User
+                        Agreement</a>.</li>
+            </ul>
+            <p>Refunds may be available for paid Courses and events under certain circumstances as detailed below:</p>
+            <ul>
+                <li>For Courses where the Certificate has been purchased, a refund can be requested provided the Course
+                    has not been completed and the Certificate issued.</li>
+                <li>For webinars and other online events, presentations, or Courses, a refund can be requested up to 48
+                    hours before the start of the event.</li>
+                <li>For any Courses or events that are in-person or include an in-person component, a refund can be
+                    requested up to 5 working days before the start of the event or Course.</li>
+            </ul>
+
+            <h2>Continuous Professional Development (CPD) Accreditation</h2>
+            <p>Certain courses offered on the Site may be eligible for CPD points/credits. It is your responsibility to
+                verify whether a course meets the CPD requirements of your professional body.</p>
+            <p>HDR UK makes no representation or warranty as to the recognition of its courses by any professional body
+                for CPD purposes.</p>
+
+            <h2>Third Party Terms</h2>
+            <p>The Site has been created using the <a href="https://openedx.org/trademark-licensing-details/">Open edX
+                    platform</a>.</p>
+            <p>The Site may integrate with or contain links to third party applications, websites, and services
+                ("Third-Party Service(s)") to make available content, products, and/or services to you. These
+                Third-Party Services may have their own terms and conditions of use and privacy policies, and your use
+                of these Third-Party Services will be governed by and subject to such terms and conditions and privacy
+                policies. You understand and agree that HDR UK does not endorse and is not responsible or liable for the
+                opinions, behaviour, features, or content of any Third-Party Service or for any transaction you may
+                enter into with the provider of any such Third-Party Services, nor does HDR UK warrant the compatibility
+                or continuing compatibility of the Third-Party Services with the Site.</p>
+
+            <h2>External Resources</h2>
+            <p>The Site may provide you with the ability to use and access resources such as articles, tools, and forums
+                which are hosted or operated by third-party entities ("External Resources”). While HDR UK aims to
+                provide access to high-quality and relevant resources, we do not control these external sites or
+                services and are not responsible or liable for their content or accessibility. HDR UK does not endorse
+                any views expressed by such External Resources and HDR UK makes no warranty or representation with
+                respect to the completeness, security, reliability, quality, accuracy, fitness for purpose, or
+                availability of such External Resources.</p>
+            <p>HDR UK is not liable for any issues arising from your use of any Third-Party Services and that your use
+                of such Third-Party Services is at your own risk.</p>
+
+            <h2>Disclaimer and Limitation of Liability</h2>
+            <p>Your use of the Site, its contents, and any services or materials obtained through the Site is at your
+                own risk. The Site, its contents, and any services or materials obtained through the Site are provided
+                on an &#8216;as is&#8217; and &#8216;as available&#8217; basis without any warranties of any kind,
+                either express or implied.</p>
+            <p>HDR UK makes no warranty or representation with respect to the completeness, security, reliability,
+                quality, accuracy, fitness for purpose, or availability of the Site.</p>
+            <p>HDR UK, its licensors, service providers, employees, agents, officers, or directors will not be liable
+                for claims, damages, or losses arising out of or in connection with your use or inability to use the
+                Site, any External Resources linked to it, any content on the Site, or any Third-Party Services,
+                including any direct, indirect, special, incidental, consequential, or punitive losses, claims, or
+                damages, including but not limited to loss of revenue, loss of profits, loss of business or anticipated
+                savings, loss of use, loss of goodwill, loss of data, and whether caused by tort (including negligence),
+                breach of contract, or otherwise, even if foreseeable, however, HDR UK does not limit or exclude
+                liability for death or personal injury as a result of negligence, fraud, or statements made fraudulently
+                or any other liability for which the governing law expressly prohibits limitation or exclusion.</p>
+
+            <h2>Governing Law and Jurisdiction</h2>
+            <p>These Terms, their subject matter, and their formation (and any non-contractual disputes or claims) are
+                governed by English Law. You agree to the exclusive jurisdiction of the courts of England.</p>
+
+            <h2>Severability</h2>
+            <p>If any provision of these Terms is held by a court or other tribunal of competent jurisdiction to be
+                invalid, illegal, or unenforceable for any reason, such provision shall be eliminated or limited to the
+                minimum extent such that the remaining provisions of the Terms will continue in full force and effect.
+            </p>
+
+            <h2>Your Comments and Concerns</h2>
+            <p>All feedback, comments, requests for technical support, and other communications relating to the Site
+                should be directed to: <a href="mailto:learn@hdruk.ac.uk">learn@hdruk.ac.uk</a></p>
+
+        </section>
+    </main>
