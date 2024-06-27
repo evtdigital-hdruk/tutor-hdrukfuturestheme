@@ -49,6 +49,8 @@ input:-webkit-autofill:active{
 h1,
 h2,
 h3,
+h4,
+h5,
 h1 span,
 h2 span,
 h3 span,
@@ -1377,6 +1379,7 @@ body.indigo-dark-theme {
 @import '../../../extra/footer';
 @import '../../../extra/header';
 @import '../../../dashboard/dashboard';
+@import '../../../certificates/certificates.scss';
 @import '../../../course_modes/choose';
 @import '../../../courseware/discover';
 @import '../../../courseware/about';
@@ -1385,3 +1388,5 @@ body.indigo-dark-theme {
 @import '../../../programs/programs';
 @import '../../../certificates/certificate';
 @import '../../../xblock/xblock';
+@import '../../../static_templates/static_templates.scss';
+@import '../../../static_templates/privacy.scss';
