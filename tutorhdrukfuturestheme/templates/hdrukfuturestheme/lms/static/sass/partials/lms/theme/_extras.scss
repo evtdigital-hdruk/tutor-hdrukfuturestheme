@@ -41,6 +41,8 @@ body.view-profile {
 h1,
 h2,
 h3,
+h4,
+h5,
 h1 span,
 h2 span,
 h3 span,
@@ -339,6 +341,7 @@ nav.wrapper-preview-menu {
 @import '../../../extra/footer';
 @import '../../../extra/header';
 @import '../../../dashboard/dashboard';
+@import '../../../certificates/certificates.scss';
 @import '../../../course_modes/choose';
 @import '../../../courseware/discover';
 @import '../../../courseware/about';

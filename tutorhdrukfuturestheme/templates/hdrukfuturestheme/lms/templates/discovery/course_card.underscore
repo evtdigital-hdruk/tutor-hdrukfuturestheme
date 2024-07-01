@@ -4,7 +4,6 @@
                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const formattedDate = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
     return formattedDate;
-    console.log(settings)
 }
 %>
 <article class="course" role="region" aria-label="<%- content.display_name %>">
