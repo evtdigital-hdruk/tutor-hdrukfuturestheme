@@ -76,6 +76,16 @@ header.global-header {
 
   //background-color: #4c61bf;
   box-shadow: none;
+
+  .main-header {
+
+    display: flex;
+    flex-direction: row;
+
+    .nav-links {
+      flex-grow: 1;
+    }
+  }
 }
 
 header.global-header .nav-links .secondary .user-image-frame {
@@ -84,6 +94,10 @@ header.global-header .nav-links .secondary .user-image-frame {
 
 header.global-header .nav-links .secondary .dropdown-user-menu {
   position: fixed;
+}
+
+header.global-header .nav-links .secondary .btn-holder {
+  margin: 0;
 }
 
 /////////////////// Sign in form
@@ -336,6 +350,22 @@ nav.wrapper-preview-menu {
       }
     }
   }
+}
+
+.global-header .nav-links .secondary a.register-btn {
+  background: #fff;
+  color: #29235C;
+  border: 1px solid #29235C;
+  padding: 5px 20px;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 20px;
+  font-size: 14px;
+  border-radius: 6px;
+  font-weight: 500;
+  display: block;
+  max-width: fit-content;
+  margin-left: auto;
 }
 
 @import '../../../extra/footer';
