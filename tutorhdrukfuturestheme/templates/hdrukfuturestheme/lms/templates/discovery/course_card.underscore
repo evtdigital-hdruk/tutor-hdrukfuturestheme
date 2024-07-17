@@ -16,7 +16,6 @@
             <div class="course-details-container">
                 <h2 class="course-name">
                     <span class="course-title"><%- content.display_name %></span>
-                    <span class="course-organization"><%- org %></span>
                     <% if (typeof course_type !== 'undefined') { %>
                     <% if (course_type == "video") { %>
                     <span class="course-type">Video</span>
