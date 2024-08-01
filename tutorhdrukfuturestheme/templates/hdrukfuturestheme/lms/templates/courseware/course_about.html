@@ -323,6 +323,7 @@ def truncate_bio(bio, length=100):
                 <h4>${ instructor['title'] } ${ (instructor['title'] and instructor['organization']) and '-'} ${ instructor['organization'] }</h4>
               </div>
             </div>
+            % if instructor['bio']:
             <div class="instructor-bio-container">
               <p class="truncated-bio">${truncate_bio(instructor['bio'])}
               <span class="read-more">Read more</span>
@@ -331,6 +332,7 @@ def truncate_bio(bio, length=100):
               <span class="read-less">Read less</span>
               </p>
             </div>
+            %endif
             <div class="instructor-view-more-courses">
               <button>
                 <a href="/courses?type=instructor_info&query=${ instructorNameCamelCase }&name=${ instructor['name'] }">
