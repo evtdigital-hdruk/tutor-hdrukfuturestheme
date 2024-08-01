@@ -181,7 +181,7 @@ def truncate_bio(bio, length=100):
             try:
               overview = clean_dangerous_html(get_course_about_section(request, course, "overview"))
             except:
-              pass
+              overview = None
         %>
         % if overview:
            ${overview}
