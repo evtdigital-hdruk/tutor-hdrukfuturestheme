@@ -176,7 +176,15 @@ def truncate_bio(bio, length=100):
       % endif
 
       <div class="inner-wrapper">
-        ${clean_dangerous_html(get_course_about_section(request, course, "overview"))}
+        <%
+            try:
+              overview = clean_dangerous_html(get_course_about_section(request, course, "overview"))
+            except:
+              pass
+        %>
+        % if overview:
+           ${overview}
+        % endif
       </div>
       
     </div>
