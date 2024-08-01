@@ -3,10 +3,16 @@
     &.container {
         padding-top: 50px;
         padding-bottom: 20px;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+
+        background: #ffffff;
 
         @include media-breakpoint-up(md) {
             padding-top: 70px;
             padding-bottom: 70px;
+            padding-left: 30px !important;
+            padding-right: 30px !important;
         }
     }
 
@@ -87,6 +93,7 @@
                 overflow: visible;
                 border: none;
                 aspect-ratio: 16/9;
+                height: auto;
 
                 &:after {
                     position: absolute;
@@ -279,6 +286,10 @@
                     font-size: 14px;
                     line-height: 20px;
                     font-weight: 500;
+                }
+
+                li {
+                    font: 16px/20px $font-family-sans-serif;
                 }
 
                 .response {
