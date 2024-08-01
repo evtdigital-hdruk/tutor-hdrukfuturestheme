@@ -255,8 +255,19 @@ def truncate_bio(bio, length=100):
             hours, minutes = get_course_about_section(request, course, "effort").split(':')
             hours = int(hours)
             minutes = int(minutes)
+            hours_display = ""
+            minutes_display = ""
+            if int(hours) > 1:
+                hours_display = f"{int(hours)} hours"
+            elif int(hours) == 1:
+                hours_display = f"{int(hours)} hour"
+        
+            if int(minutes) > 1:
+                minutes_display = f"{int(minutes)} mins"
+            elif int(minutes) == 1:
+                minutes_display = f"{int(minutes)} min"
             %>
-            <li class="important-dates-item"><span class="icon fa fa-pencil" aria-hidden="true"></span><p class="important-dates-item-title">${_("Course Length")}</p><span class="important-dates-item-text effort">${int(hours)} hours ${minutes} mins</span></li>
+            <li class="important-dates-item"><span class="icon fa fa-pencil" aria-hidden="true"></span><p class="important-dates-item-title">${_("Course Length")}</p><span class="important-dates-item-text effort">${hours_display} ${minutes_display}</span></li>
             <!-- session_id = enrollment.course_id
             course_mode_info = all_course_modes.get(session_id) -->
           % endif
