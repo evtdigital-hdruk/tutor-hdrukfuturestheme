@@ -1,4 +1,4 @@
-name: CI
+name: Build Docker Images
 
 on: [workflow_dispatch]
 
@@ -25,7 +25,10 @@ jobs:
 
     - name: Set up Python virtual environment
       run: |
-        python3 -m venv $VENV_ENVIRONMENT_NAME
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install -r requirements.txt
+          echo "VENV_ENVIRONMENT_NAME=$VIRTUAL_ENV" >> $GITHUB_ENV
 
     - name: Install Tutor and Plugins
       run: |
