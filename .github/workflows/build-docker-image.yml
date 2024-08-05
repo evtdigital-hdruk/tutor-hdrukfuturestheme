@@ -34,18 +34,7 @@ jobs:
         pip install "tutor[$TUTOR_VERSION]"
         pip install git+https://github.com/hastexo/tutor-contrib-s3@$S3_PLUGIN_VERSION
         pip install git+https://github.com/evtdigital-hdruk/tutor-hdrukfuturestheme@$HDRUKFUTURESTHEME_PLUGIN_VERSION
-
-    - name: Set up SSH for private plugin
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-    - name: Install Private Plugin
-      run: |
-        source $VENV_ENVIRONMENT_NAME/bin/activate
-        pip install git+ssh://git@github.com/evtdigital-hdruk/tutor-contrib-hdrukplugin.git@$HDRUKSETTINGS_PLUGIN_VERSION
+        pip install git+https://${{ secrets.USERNAME }}:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/evtdigital-hdruk/tutor-contrib-hdrukplugin.git@$HDRUKSETTINGS_PLUGIN_VERSION
         tutor plugins enable s3 hdrukfuturestheme hdrukplugin discovery ecommerce cairn
 
     - name: Build Tutor Images
