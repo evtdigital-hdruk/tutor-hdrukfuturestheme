@@ -36,6 +36,7 @@ jobs:
         pip install git+https://github.com/evtdigital-hdruk/tutor-hdrukfuturestheme@$HDRUKFUTURESTHEME_PLUGIN_VERSION
         pip install git+https://${{ secrets.USERNAME }}:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/evtdigital-hdruk/tutor-contrib-hdrukplugin.git@$HDRUKSETTINGS_PLUGIN_VERSION
         tutor plugins list
+        tutor plugins index list
         tutor plugins update
         tutor plugins install discovery
         tutor plugins disable indigo
