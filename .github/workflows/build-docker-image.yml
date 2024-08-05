@@ -1,0 +1,73 @@
+name: CI
+
+on: [workflow_dispatch]
+
+env:
+  VENV_ENVIRONMENT_NAME: openedxbuild
+  TUTOR_VERSION: 17.0.4
+  S3_PLUGIN_VERSION: v1.4.0
+  HDRUKFUTURESTHEME_PLUGIN_VERSION: v1.2.0-beta
+  HDRUKSETTINGS_PLUGIN_VERSION: main
+  EDX_PLATFORM_VERSION: hdruk/v1.2.0-beta
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+    - uses: actions/checkout@v2
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10' 
+
+    - name: Set up Python virtual environment
+      run: |
+        python3 -m venv $VENV_ENVIRONMENT_NAME
+
+    - name: Install Tutor and Plugins
+      run: |
+        source ~/$VENV_ENVIRONMENT_NAME/bin/activate
+        pip install "tutor[$TUTOR_VERSION]"
+        pip install git+https://github.com/hastexo/tutor-contrib-s3@$S3_PLUGIN_VERSION
+        pip install git+https://github.com/evtdigital-hdruk/tutor-hdrukfuturestheme@$HDRUKFUTURESTHEME_PLUGIN_VERSION
+
+    - name: Set up SSH for private plugin
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+    - name: Install Private Plugin
+      run: |
+        source ~/$VENV_ENVIRONMENT_NAME/bin/activate
+        pip install git+ssh://git@github.com/evtdigital-hdruk/tutor-contrib-hdrukplugin.git@$HDRUKSETTINGS_PLUGIN_VERSION
+        tutor plugins enable s3 hdrukfuturestheme hdrukplugin discovery ecommerce cairn
+
+    - name: Build Tutor Images
+      run: |
+        source ~/$VENV_ENVIRONMENT_NAME/bin/activate
+        tutor images build openedx --build-arg EDX_PLATFORM_REPOSITORY=https://github.com/evtdigital-hdruk/edx-platform.git --build-arg EDX_PLATFORM_VERSION=$EDX_PLATFORM_VERSION
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build and push Docker images to ECR
+      run: |
+        # Tag the image
+        IMAGE_TAG=${{ secrets.ECR_REPOSITORY_URI }}:latest
+        docker tag tutor_openedx:latest $IMAGE_TAG
+        docker tag tutor_mfe:latest $IMAGE_TAG-mfe
+
+        # Push the image to ECR
+        docker push $IMAGE_TAG
+        docker push $IMAGE_TAG-mfe
