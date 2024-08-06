@@ -78,6 +78,7 @@ jobs:
     - name: Build Custom MFE Image
       run: |
         source $VENV_ENVIRONMENT_NAME/bin/activate
+        tutor images build mfe
         echo "IMAGE_NAME_MFE=$(tutor images printtag mfe)" >> $GITHUB_ENV
 
     - name: Configure AWS credentials
