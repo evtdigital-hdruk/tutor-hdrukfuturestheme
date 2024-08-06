@@ -10,7 +10,7 @@ env:
   EDX_PLATFORM_VERSION: hdruk/v1.2.0-beta
 
 jobs:
-  setup:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -69,18 +69,6 @@ jobs:
         source $VENV_ENVIRONMENT_NAME/bin/activate
         tutor plugins enable s3 hdrukfuturestheme hdrukplugin discovery ecommerce cairn
 
-    - name: Build Custom Open edX Image
-      run: |
-        source $VENV_ENVIRONMENT_NAME/bin/activate
-        tutor images build openedx --build-arg EDX_PLATFORM_REPOSITORY=https://github.com/evtdigital-hdruk/edx-platform.git --build-arg EDX_PLATFORM_VERSION=$EDX_PLATFORM_VERSION
-        echo "IMAGE_NAME_OPENEDX=$(tutor images printtag openedx)" >> $GITHUB_ENV
-
-    - name: Build Custom MFE Image
-      run: |
-        source $VENV_ENVIRONMENT_NAME/bin/activate
-        tutor images build mfe
-        echo "IMAGE_NAME_MFE=$(tutor images printtag mfe)" >> $GITHUB_ENV
-
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -92,13 +80,32 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Build and push Docker images to ECR
+    - name: Build Custom Open edX Image
+      run: |
+        source $VENV_ENVIRONMENT_NAME/bin/activate
+        tutor images build openedx --build-arg EDX_PLATFORM_REPOSITORY=https://github.com/evtdigital-hdruk/edx-platform.git --build-arg EDX_PLATFORM_VERSION=$EDX_PLATFORM_VERSION
+        echo "IMAGE_NAME_OPENEDX=$(tutor images printtag openedx)" >> $GITHUB_ENV
+
+    - name: Build and Push Open edX Image to ECR
+      run: |
+        IMAGE_TAG=${{ secrets.ECR_REPOSITORY_URI }}:latest
+        docker tag $IMAGE_NAME_OPENEDX $IMAGE_TAG
+        docker push $IMAGE_TAG
+
+    - name: Prune Docker and Reclaim Disk Space
+      run: |
+        docker buildx prune -f
+        docker system prune -fa
+
+    - name: Build Custom MFE Image
+      run: |
+        source $VENV_ENVIRONMENT_NAME/bin/activate
+        tutor images build mfe
+        echo "IMAGE_NAME_MFE=$(tutor images printtag mfe)" >> $GITHUB_ENV
+
+    - name: Build and Push MFE Image to ECR
       run: |
         # Tag the image
         IMAGE_TAG=${{ secrets.ECR_REPOSITORY_URI }}:latest
-        docker tag $IMAGE_NAME_OPENEDX $IMAGE_TAG
         docker tag $IMAGE_NAME_MFE $IMAGE_TAG-mfe
-
-        # Push the image to ECR
-        docker push $IMAGE_TAG
         docker push $IMAGE_TAG-mfe
