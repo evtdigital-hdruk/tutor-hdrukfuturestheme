@@ -80,17 +80,19 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
+    - name: Update Tutor Docker Registry
+      run: |
+        tutor config save --set DOCKER_REGISTRY=${{ secrets.ECR_REPOSITORY_URI }}/ --set DOCKER_IMAGE_OPENEDX=${{ secrets.ECR_REPOSITORY_URI }}/evtdigitalhdruk/openedx:$TUTOR_VERSION --set MFE_DOCKER_IMAGE=${{ secrets.ECR_REPOSITORY_URI }}/evtdigitalhdruk/openedx-mfe:$TUTOR_VERSION
+
     - name: Build Custom Open edX Image
       run: |
         source $VENV_ENVIRONMENT_NAME/bin/activate
         tutor images build openedx --build-arg EDX_PLATFORM_REPOSITORY=https://github.com/evtdigital-hdruk/edx-platform.git --build-arg EDX_PLATFORM_VERSION=$EDX_PLATFORM_VERSION
-        echo "IMAGE_NAME_OPENEDX=$(tutor images printtag openedx)" >> $GITHUB_ENV
 
-    - name: Build and Push Open edX Image to ECR
+    - name: Push Open edX Image to ECR
       run: |
-        IMAGE_TAG=${{ secrets.ECR_REPOSITORY_URI }}:latest
-        docker tag $IMAGE_NAME_OPENEDX $IMAGE_TAG
-        docker push $IMAGE_TAG
+        source $VENV_ENVIRONMENT_NAME/bin/activate
+        tutor images push openedx
 
     - name: Prune Docker and Reclaim Disk Space
       run: |
@@ -105,11 +107,8 @@ jobs:
         echo 'max-parallelism = 2' >> maxparallelbuildkit.toml
         docker buildx create --use --name=maxpara2 --driver=docker-container --config=./maxparallelbuildkit.toml
         tutor images build mfe
-        echo "IMAGE_NAME_MFE=$(tutor images printtag mfe)" >> $GITHUB_ENV
 
-    - name: Build and Push MFE Image to ECR
+    - name: Push MFE Image to ECR
       run: |
-        # Tag the image
-        IMAGE_TAG=${{ secrets.ECR_REPOSITORY_URI }}:latest
-        docker tag $IMAGE_NAME_MFE $IMAGE_TAG-mfe
-        docker push $IMAGE_TAG-mfe
+        source $VENV_ENVIRONMENT_NAME/bin/activate
+        tutor images push mfe
