@@ -100,6 +100,10 @@ jobs:
     - name: Build Custom MFE Image
       run: |
         source $VENV_ENVIRONMENT_NAME/bin/activate
+        touch maxparallelbuildkit.toml
+        echo '[worker.oci]' > maxparallelbuildkit.toml
+        echo 'max-parallelism = 2' >> maxparallelbuildkit.toml
+        docker buildx create --use --name=maxpara2 --driver=docker-container --config=./maxparallelbuildkit.toml
         tutor images build mfe
         echo "IMAGE_NAME_MFE=$(tutor images printtag mfe)" >> $GITHUB_ENV
 
