@@ -82,6 +82,7 @@ jobs:
 
     - name: Update Tutor Docker Registry
       run: |
+        source $VENV_ENVIRONMENT_NAME/bin/activate
         tutor config save --set DOCKER_REGISTRY=${{ secrets.ECR_REPOSITORY_URI }}/ --set DOCKER_IMAGE_OPENEDX=${{ secrets.ECR_REPOSITORY_URI }}/evtdigitalhdruk/openedx:$TUTOR_VERSION --set MFE_DOCKER_IMAGE=${{ secrets.ECR_REPOSITORY_URI }}/evtdigitalhdruk/openedx-mfe:$TUTOR_VERSION
 
     - name: Build Custom Open edX Image
