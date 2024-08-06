@@ -95,8 +95,8 @@ jobs:
       run: |
         # Tag the image
         IMAGE_TAG=${{ secrets.ECR_REPOSITORY_URI }}:latest
-        docker tag IMAGE_NAME_OPENEDX $IMAGE_TAG
-        docker tag IMAGE_NAME_MFE $IMAGE_TAG-mfe
+        docker tag $IMAGE_NAME_OPENEDX $IMAGE_TAG
+        docker tag $IMAGE_NAME_MFE $IMAGE_TAG-mfe
 
         # Push the image to ECR
         docker push $IMAGE_TAG
