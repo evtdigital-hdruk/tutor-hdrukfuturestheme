@@ -45,7 +45,7 @@ jobs:
     - name: Install HDR UK Settings plugin
       run: |
         source $VENV_ENVIRONMENT_NAME/bin/activate
-        pip install git+https://${{ secrets.USERNAME }}:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/evtdigital-hdruk/tutor-contrib-hdrukplugin.git@$HDRUKSETTINGS_PLUGIN_VERSION
+        pip install git+https://${{ secrets.USERNAME }}:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/evtdigital-hdruk/tutor-contrib-hdrukplugin.git@${{ vars.HDRUKSETTINGS_PLUGIN_VERSION }}
 
     - name: Disable Indigo plugin
       run: |
