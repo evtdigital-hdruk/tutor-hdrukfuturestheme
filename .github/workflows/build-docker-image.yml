@@ -5,9 +5,8 @@ on: [workflow_dispatch]
 env:
   TUTOR_VERSION: 17.0.4
   S3_PLUGIN_VERSION: v1.4.0
-  HDRUKFUTURESTHEME_PLUGIN_VERSION: v1.2.0-beta
-  HDRUKSETTINGS_PLUGIN_VERSION: main
-  EDX_PLATFORM_VERSION: hdruk/v1.2.0-beta
+  HDRUKFUTURESTHEME_PLUGIN_VERSION: master
+  EDX_PLATFORM_VERSION: feature/additional-course-settings
 
 jobs:
   build:
@@ -46,7 +45,7 @@ jobs:
     - name: Install HDR UK Settings plugin
       run: |
         source $VENV_ENVIRONMENT_NAME/bin/activate
-        pip install git+https://${{ secrets.USERNAME }}:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/evtdigital-hdruk/tutor-contrib-hdrukplugin.git@$HDRUKSETTINGS_PLUGIN_VERSION
+        pip install git+https://${{ secrets.USERNAME }}:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/evtdigital-hdruk/tutor-contrib-hdrukplugin.git@${{ env.HDRUKSETTINGS_PLUGIN_VERSION }}
 
     - name: Disable Indigo plugin
       run: |
