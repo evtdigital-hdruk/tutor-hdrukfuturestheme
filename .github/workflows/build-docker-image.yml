@@ -61,12 +61,12 @@ jobs:
     - name: Install additional Tutor plugins
       run: |
         source $VENV_ENVIRONMENT_NAME/bin/activate
-        tutor plugins install discovery ecommerce cairn
+        tutor plugins install discovery ecommerce cairn jupyter
 
     - name: Enable Installed Plugins
       run: |
         source $VENV_ENVIRONMENT_NAME/bin/activate
-        tutor plugins enable s3 hdrukfuturestheme hdrukplugin discovery ecommerce cairn
+        tutor plugins enable s3 hdrukfuturestheme hdrukplugin discovery ecommerce cairn jupyter
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
