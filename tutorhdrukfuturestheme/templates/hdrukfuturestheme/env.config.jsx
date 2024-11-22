@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Cookies from 'universal-cookie';
 
-import Footer from '@edly-io/indigo-frontend-component-footer';
+import Footer from '@evtdigital-hdruk/frontend-component-footer';
 import { getConfig } from '@edx/frontend-platform';
 import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';
 
