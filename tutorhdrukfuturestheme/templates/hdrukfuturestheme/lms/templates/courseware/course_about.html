@@ -176,7 +176,15 @@ def truncate_bio(bio, length=100):
       % endif
 
       <div class="inner-wrapper">
-        ${clean_dangerous_html(get_course_about_section(request, course, "overview"))}
+        <%
+            try:
+              overview = clean_dangerous_html(get_course_about_section(request, course, "overview"))
+            except:
+              overview = None
+        %>
+        % if overview:
+           ${overview}
+        % endif
       </div>
       
     </div>
@@ -255,8 +263,19 @@ def truncate_bio(bio, length=100):
             hours, minutes = get_course_about_section(request, course, "effort").split(':')
             hours = int(hours)
             minutes = int(minutes)
+            hours_display = ""
+            minutes_display = ""
+            if int(hours) > 1:
+                hours_display = f"{int(hours)} hours"
+            elif int(hours) == 1:
+                hours_display = f"{int(hours)} hour"
+        
+            if int(minutes) > 1:
+                minutes_display = f"{int(minutes)} mins"
+            elif int(minutes) == 1:
+                minutes_display = f"{int(minutes)} min"
             %>
-            <li class="important-dates-item"><span class="icon fa fa-pencil" aria-hidden="true"></span><p class="important-dates-item-title">${_("Course Length")}</p><span class="important-dates-item-text effort">${int(hours)} hours ${minutes} mins</span></li>
+            <li class="important-dates-item"><span class="icon fa fa-pencil" aria-hidden="true"></span><p class="important-dates-item-title">${_("Course Length")}</p><span class="important-dates-item-text effort">${hours_display} ${minutes_display}</span></li>
             <!-- session_id = enrollment.course_id
             course_mode_info = all_course_modes.get(session_id) -->
           % endif
@@ -323,6 +342,7 @@ def truncate_bio(bio, length=100):
                 <h4>${ instructor['title'] } ${ (instructor['title'] and instructor['organization']) and '-'} ${ instructor['organization'] }</h4>
               </div>
             </div>
+            % if instructor['bio']:
             <div class="instructor-bio-container">
               <p class="truncated-bio">${truncate_bio(instructor['bio'])}
               <span class="read-more">Read more</span>
@@ -331,6 +351,7 @@ def truncate_bio(bio, length=100):
               <span class="read-less">Read less</span>
               </p>
             </div>
+            %endif
             <div class="instructor-view-more-courses">
               <button>
                 <a href="/courses?type=instructor_info&query=${ instructorNameCamelCase }&name=${ instructor['name'] }">
