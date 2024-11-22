@@ -42,6 +42,7 @@ section.home {
     padding: 0;
     header {
         background: none;
+        text-align: center;
         .outer-wrapper {
             .title {
                 width: 100%;
@@ -141,7 +142,8 @@ section.home {
                         }
                     }
                 }
-        text-align: center;
+            }
+        }
         .readable-width {
             max-width: 568px;
             margin: 0 auto;
