@@ -9,7 +9,9 @@ def is_valid_url(url):
         return all([parsed.scheme, parsed.netloc])
     except Exception:
         return False
-valid_logos = [logo for logo in logos if is_valid_url(logo['src'])]
+valid_logos = []
+if logos:
+    valid_logos = [logo for logo in logos if is_valid_url(logo['src'])]
 course_mode_class = course_mode if course_mode else ''
 %>
 
