@@ -1,1 +1,6 @@
-@import '../../cms/theme/settings/settings'
+@import '../../cms/theme/settings/settings';
+@import "fonts";
+
+#main{
+    background-color: $secondary;
+}

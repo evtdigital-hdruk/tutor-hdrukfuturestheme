@@ -6,12 +6,7 @@
 <%block name="pagetitle">${_("Help")}</%block>
 
 <main id="main" aria-label="Content" tabindex="-1">
-    <section class="container about static-content">
-        <h1>
-            <%block name="pageheader">${page_header or _("Help")}</%block>
-        </h1>
-        <p>
-            If you have any questions about our courses, or you are having difficulties accessing Futures, please <a href="mailto:learn@hdruk.ac.uk">contact the Training Team.</a>
-        </p>
-    </section>
+    <script type="text/javascript">
+        window.location.replace("${marketing_link('HELP')}");
+    </script>
 </main>

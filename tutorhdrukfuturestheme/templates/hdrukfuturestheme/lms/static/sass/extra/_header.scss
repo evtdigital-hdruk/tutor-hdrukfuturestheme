@@ -13,7 +13,14 @@ header.global-header {
         display: block;
     }
     .main-header {
-        height: auto;
+        display: flex;
+        align-items: center;
+        height: 50px;
+
+        @include media-breakpoint-up(lg) {
+            display: unset;
+            height: auto;
+        }
     }
     .header-logo {
         margin: 0;
@@ -33,6 +40,7 @@ header.global-header {
         }
     }
     .nav-links {
+        width: 100%;
         .main {
             margin: 0 0 0 38px;
             .nav-tab {
@@ -54,6 +62,7 @@ header.global-header {
         .secondary {
             margin: 0;
             position: relative;
+            justify-content: end;
             .toggle-user-dropdown {
                 padding: 9px 15px;
                 background: $primary-light;
@@ -75,6 +84,9 @@ header.global-header {
                     width: 5px;
                     display: inline-block;
                     vertical-align: top;
+                }
+                .username {
+                    font: -webkit-control;
                 }
             }
             .dropdown-user-menu {
@@ -151,11 +163,180 @@ header.global-header {
 .header-container {
     margin: 0 auto;
     padding: 0 15px;
-    max-width: 1090px;
+    max-width: 1600px;
     box-sizing: border-box;
     &:after {
         display: block;
         clear: both;
         content: "";
+    }
+}
+
+.theme-toggle-button{
+    position: relative;
+    display: {% if INDIGO_ENABLE_DARK_TOGGLE %}flex{% else %}none{% endif %};
+    align-items: center;
+    margin-right: 0 !important;
+
+    @include media-breakpoint-up(lg) {
+        margin-right: 1.5rem !important;
+    }
+
+    .light-theme-icon, .dark-theme-icon{
+        width: 18px;
+        height: 1.5rem;
+        color: $primary;
+        & svg {
+            width: inherit;
+            height: inherit;
+        }
+    }
+
+    #toggle-switch {
+        display: flex;
+        margin: 0 5px;
+
+        label {
+            margin: 0;
+        }
+
+/* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 45px;
+            height: 24px;
+
+            /* Hide default HTML checkbox */
+            input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            /* The slider */
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: $primary-d;
+                transition: .4s;
+
+                &::before{
+                    position: absolute;
+                    content: "";
+                    height: 20px;
+                    width: 20px;
+                    left: 3px;
+                    bottom: 2px;
+                    background-color: white;
+                    transition: .4s;
+                }
+
+                &.round{
+                    border-radius: 34px;
+                    &::before{
+                        border-radius: 50%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+body.indigo-dark-theme {
+    background: $body-bg-d !important;
+    color: $text-color-d !important;
+    .window-wrap {
+        background: $body-bg-d;
+    }
+    .mobile-menu {
+        position: absolute;
+        left: 0;
+        top: 54px;
+        z-index: 9999;
+        margin: 0;
+        border: none;
+        border-bottom: 2px solid $primary;
+        width: 100%;
+        .mobile-nav-link {
+            a {
+                background: #454545;
+                color: $text-color-d;
+                &:hover, &.active {
+                    background: #323232;
+                    color: $text-color-d;
+                }
+            }
+        }
+    }
+    header.global-header {
+        background: $body-bg-d;
+        box-shadow: 0px 1px 2px 0px rgba(255, 255, 255, 0.8), 0px 1px 3px 0px rgba(255, 255, 255, 0.1);
+        .nav-links {
+            .main {
+                .nav-tab {
+                    a {
+                        color: $text-color-d;
+                        &.active, &:hover {
+                            color: $text-color-d;
+                            border-bottom: 2px solid $text-color-d;
+                        }
+                    }
+                }
+            }
+            .secondary {
+                .toggle-user-dropdown {
+                    background: $primary-d;
+                    color: $btn-color-d;
+                    &:after {
+                        border-color: $btn-color-d;
+                    }
+                }
+                .dropdown-user-menu {
+                    background: $light-overlay-d;
+                    box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.8), 0px 4px 6px -2px rgba(255, 255, 255, 0.05), 0px 10px 15px -3px rgba(255, 255, 255, 0.1);
+                    .dropdown-item {
+                        a {
+                            color: $text-color-primary;
+                            background: none;
+                            &:hover {
+                                background: $body-bg-d;
+                                color: $text-color-d;                         ;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .hamburger-menu {
+            .line {
+                background: $text-color-d;
+            }
+        }
+    }
+
+// theme toggle switch
+  .theme-toggle-button{
+        .light-theme-icon, .dark-theme-icon{
+            color: $text-color-primary;
+        }
+        #toggle-switch {
+            .switch {
+                /* The slider */
+                .slider {
+                    background-color: #ccc;
+                    &::before{
+                        transform: translateX(19px);
+                        box-shadow: 0 0 1px $primary-d;
+                    }
+                }
+            }
+        }
     }
 }

@@ -3,7 +3,7 @@ variables:
     TUTOR_EXTRA_ENABLED_PLUGINS: mfe
     TUTOR_PYPI_PACKAGE: tutor-hdrukfuturestheme
     TUTOR_IMAGES: openedx mfe
-    OPENEDX_RELEASE: quince
+    OPENEDX_RELEASE: redwood
     GITHUB_REPO: overhangio/tutor-hdrukfuturestheme
 
 include:

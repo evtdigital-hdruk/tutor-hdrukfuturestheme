@@ -2,6 +2,16 @@
 <%! from django.utils.translation import gettext as _ %>
 <%namespace name='static' file='../static_content.html'/>
 <%
+from urllib.parse import urlparse
+def is_valid_url(url):
+    try:
+        parsed = urlparse(url)
+        return all([parsed.scheme, parsed.netloc])
+    except Exception:
+        return False
+valid_logos = []
+if logos:
+    valid_logos = [logo for logo in logos if is_valid_url(logo['src'])]
 course_mode_class = course_mode if course_mode else ''
 %>
 
@@ -35,42 +45,54 @@ course_mode_class = course_mode if course_mode else ''
                 </div>
                 <div class="certificate-logo"><img src="https://www.hdruk.ac.uk/wp-content/themes/hdruk/assets/img/logo.svg" alt="HDR UK Logo"></div>
             </div>
-        <div class="certificate-content-container">
-            <div class="certificate-details-container">
-            <p>This is to certify that</p>
-            <h2 class="user-name">${accomplishment_copy_name}</h2>
-            <p>${accomplishment_copy_description_full}</p>
-            <h2 class="course-name">${accomplishment_copy_course_name}</h2>
-            <p>${accomplishment_copy_course_description}</p>
-            </div>
-            <div class="certificate-signatories-container">
-            <div class="signatures">
-                % if mode != 'base':
-                    <h3 class="accomplishment-signatories-title sr-only">${_("Noted by")}</h3>
-    
-                        <div class="signatories-content-container">
-                            % if certificate_data:
-                                % for signatory in certificate_data.get('signatories', []):
-                                    % if signatory.get('signature_image_path'):
-                                        <div class="signatory-container">
-                                            <div class="signature-image-container">
-                                                <img class="signature-image" src="${(signatory['signature_image_path'])}" alt="${signatory['name']}">
-                                            </div>
-    
-                                            <h4 class="signatory-name">${signatory['name']}</h4>
-                                            <div class="signatory-details">
-                                                <p class="role">${signatory['title']}</p>
-                                                <p class="organization">${signatory['organization']}</p>
-                                            </div>
-                                        </div>
-                                    % endif
-                                % endfor
-                            % endif
-                        </div>
-                % endif
+            <div class="certificate-content-container">
+                <div class="certificate-details-container">
+                <p>This is to certify that</p>
+                <h2 class="user-name">${accomplishment_copy_name}</h2>
+                <p>${accomplishment_copy_description_full}</p>
+                <h2 class="course-name">${accomplishment_copy_course_name}</h2>
+                <p>${accomplishment_copy_course_description}</p>
                 </div>
+                <div class="certificate-signatories-container">
+                <div class="signatures">
+                    % if mode != 'base':
+                        <h3 class="accomplishment-signatories-title sr-only">${_("Noted by")}</h3>
+        
+                            <div class="signatories-content-container">
+                                % if certificate_data:
+                                    % for signatory in certificate_data.get('signatories', []):
+                                        % if signatory.get('signature_image_path'):
+                                            <div class="signatory-container">
+                                                <div class="signature-image-container">
+                                                    <img class="signature-image" src="${(signatory['signature_image_path'])}" alt="${signatory['name']}">
+                                                </div>
+        
+                                                <h4 class="signatory-name">${signatory['name']}</h4>
+                                                <div class="signatory-details">
+                                                    <p class="role">${signatory['title']}</p>
+                                                    <p class="organization">${signatory['organization']}</p>
+                                                </div>
+                                            </div>
+                                        % endif
+                                    % endfor
+                                % endif
+                            </div>
+                    % endif
+                    </div>
+                </div>
+                % if cpd == "true":
+                <div class="certificate-cpd-container">
+                    <img class="certificate-cpd-logo" src="/static/hdrukfuturestheme/images/cpd-logo.jpg">
+                </div>
+                % endif
+                % if valid_logos:
+                <div class="certificate-logos-container">
+                    % for logo in valid_logos:
+                        <img src="${logo['src']}" alt="${logo['alt']}" onerror="this.style.display='none'">
+                    % endfor
+                </div>
+                % endif
             </div>
-        </div>
         <div class="certificate-footer-container">
             <div class="certificate-id-container">${certificate_id_number_title}: ${certificate_id_number}</div>
             <div class="certificate-date-issued-container">${certificate_date_issued_title} ${certificate_date_issued}</div>

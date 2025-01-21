@@ -19,6 +19,52 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-18.2.2'></a>
+## v18.2.2 (2024-10-29)
+
+- [Feature] Upgrade upstream apps to open-release/redwood.3. In particular, this will resolve serious issues with [course creation](https://github.com/openedx/frontend-app-authoring/issues/1199) and [language switching](https://github.com/openedx/frontend-app-account/issues/1052). (by @regisb)
+
+<a id='changelog-18.2.1'></a>
+## v18.2.1 (2024-10-11)
+
+- [Feature] Introduced theme toggle feature with enable/disable option and runtime switch between light and dark modes. (by @hinakhadim)
+
+<a id='changelog-18.1.1'></a>
+## v18.1.1 (2024-08-27)
+
+- [BugFix] Add the Indigo footer in MFEs via env.config.jsx to resolve display issues on the /account/ page after upgrading to Redwood. (by @hinakhadim)
+
+<a id='changelog-18.1.0'></a>
+## v18.1.0 (2024-07-23)
+
+- [Improvement] Instead of forcing users to use Authentication MFe, the platform decides how users should log in. (by @CodeWithEmad)
+
+- [Feature] Dark theme: the Indigo theme now covers dark theme for LMS pages, including the MFEs, and they are more beautiful!  (by @tanveer65 and @hinakhadim)
+
+<a id='changelog-18.0.0'></a>
+## v18.0.0 (2024-06-20)
+
+- 💥[Feature] Upgrade to Redwood (by @hinakhadim)
+
+<a id='changelog-17.4.2'></a>
+## v17.4.2 (2024-06-11)
+
+- [BugFix] Add big screen variable of screen responsiveness (by @tanveer65)
+
+<a id='changelog-17.4.1'></a>
+## v17.4.1 (2024-06-10)
+
+- [BugFix] Remove undefined variables of dark-theme. (by @hinakhadim)
+
+<a id='changelog-17.4.0'></a>
+## v17.4.0 (2024-06-10)
+
+- [Bugfix] Make plugin compatible with Python 3.12 by removing dependency on `pkg_resources`. (by @regisb)
+
+- [Bugfix] *.scss files in cms directory were not rendered in the tutor environment because they are stored in a "partials" subdirectory. (by @Talha-Rizwan)
+
+- [Improvement] Add styles for Profile and Account MFE and increase container width for better readability. (by @tanveer65)
+
 <a id='changelog-17.3.0'></a>
 ## v17.3.0 (2024-03-04)
 

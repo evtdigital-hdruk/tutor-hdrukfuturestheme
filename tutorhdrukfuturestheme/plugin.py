@@ -22,7 +22,8 @@ config: t.Dict[str, t.Dict[str, t.Any]] = {
     "defaults": {
         "VERSION": __version__,
         "WELCOME_MESSAGE": "The place for all your online learning",
-        "PRIMARY_COLOR": "#3b85ff",  # cool blue
+        "PRIMARY_COLOR": "#15376D",  # Indigo
+        "ENABLE_DARK_TOGGLE": True,
         # Footer links are dictionaries with a "title" and "url"
         # To remove all links, run:
         # tutor config save --set INDIGO_FOOTER_NAV_LINKS=[]
@@ -46,6 +47,7 @@ hooks.Filters.ENV_TEMPLATE_ROOTS.add_item(
 hooks.Filters.ENV_TEMPLATE_TARGETS.add_items(
     [
         ("hdrukfuturestheme", "build/openedx/themes"),
+        ("hdrukfuturestheme/env.config.jsx", "plugins/mfe/build/mfe"),
     ],
 )
 
@@ -119,32 +121,103 @@ for path in glob(str(importlib_resources.files("tutorhdrukfuturestheme") / "patc
 
 hooks.Filters.ENV_PATCHES.add_items(
     [
+        # MFE will install header version 3.0.x and will include indigo-footer as a
+        # separate package for use in env.config.jsx
         (
             "mfe-dockerfile-post-npm-install-learning",
             """
-RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdruk/v0.1.0'
-RUN npm install '@edx/frontend-component-footer@git+https://github.com/evtdigital-hdruk/frontend-component-footer.git#hdruk/v0.1.0'
+RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdruk/v1.0.0'
+RUN npm install '@evtdigital-hdruk/frontend-component-footer@git+https://github.com/evtdigital-hdruk/frontend-component-footer.git#feature/upgrade-to-redwood'
+
+COPY hdrukfuturestheme/env.config.jsx /openedx/app/
 """,
         ),
         (
             "mfe-dockerfile-post-npm-install-authn",
             """
-RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdruk/v0.1.0'
+RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdruk/v1.0.0'
 """,
         ),
-        # Tutor-Indigo v2.1 targets the styling updations in discussions and learner-dashboard MFE
+        # Tutor-Indigo v2.1 targets the styling updates in discussions and learner-dashboard MFE
         # brand-openedx is related to styling updates while others are for header and footer updates
         (
             "mfe-dockerfile-post-npm-install-discussions",
             """
-RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdruk/v0.1.0'
+RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdruk/v1.0.0'
+RUN npm install '@evtdigital-hdruk/frontend-component-footer@git+https://github.com/evtdigital-hdruk/frontend-component-footer.git#feature/upgrade-to-redwood'
+
+COPY hdrukfuturestheme/env.config.jsx /openedx/app/
 """,
         ),
         (
             "mfe-dockerfile-post-npm-install-learner-dashboard",
             """
-RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdruk/v0.1.0'
-RUN npm install '@edx/frontend-component-footer@git+https://github.com/evtdigital-hdruk/frontend-component-footer.git#hdruk/v0.1.0'
+RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdruk/v1.0.0'
+RUN npm install '@evtdigital-hdruk/frontend-component-footer@git+https://github.com/evtdigital-hdruk/frontend-component-footer.git#feature/upgrade-to-redwood'
+
+COPY hdrukfuturestheme/env.config.jsx /openedx/app/
+""",
+        ),
+        (
+            "mfe-dockerfile-post-npm-install-profile",
+            """
+RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdruk/v1.0.0'
+RUN npm install '@evtdigital-hdruk/frontend-component-footer@git+https://github.com/evtdigital-hdruk/frontend-component-footer.git#feature/upgrade-to-redwood'
+
+COPY hdrukfuturestheme/env.config.jsx /openedx/app/
+""",
+        ),
+        (
+            "mfe-dockerfile-post-npm-install-account",
+            """
+RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdruk/v1.0.0'
+RUN npm install '@evtdigital-hdruk/frontend-component-footer@git+https://github.com/evtdigital-hdruk/frontend-component-footer.git#feature/upgrade-to-redwood'
+
+COPY hdrukfuturestheme/env.config.jsx /openedx/app/
+""",
+        ),
+    ]
+)
+
+# Include js file in lms main.html, main_django.html, and certificate.html
+
+hooks.Filters.ENV_PATCHES.add_items(
+    [
+        # for production
+        (
+            "openedx-common-assets-settings",
+            """
+javascript_files = ['base_application', 'application', 'certificates_wv']
+dark_theme_filepath = ['hdrukfuturestheme/js/dark-theme.js']
+
+for filename in javascript_files:
+    if filename in PIPELINE['JAVASCRIPT']:
+        PIPELINE['JAVASCRIPT'][filename]['source_filenames'] += dark_theme_filepath
+""",
+        ),
+        # for development
+        (
+            "openedx-lms-development-settings",
+            """
+javascript_files = ['base_application', 'application', 'certificates_wv']
+dark_theme_filepath = ['hdrukfuturestheme/js/dark-theme.js']
+
+for filename in javascript_files:
+    if filename in PIPELINE['JAVASCRIPT']:
+        PIPELINE['JAVASCRIPT'][filename]['source_filenames'] += dark_theme_filepath
+
+MFE_CONFIG['INDIGO_ENABLE_DARK_TOGGLE'] = {{ INDIGO_ENABLE_DARK_TOGGLE }}
+""",
+        ),
+        (
+            "openedx-lms-production-settings",
+            """
+MFE_CONFIG['INDIGO_ENABLE_DARK_TOGGLE'] = {{ INDIGO_ENABLE_DARK_TOGGLE }}
+""",
+        ),
+        (
+            "mfe-dockerfile-post-npm-install",
+            """
 """,
         ),
     ]
