@@ -26,11 +26,9 @@ config: t.Dict[str, t.Dict[str, t.Any]] = {
         "ENABLE_DARK_TOGGLE": True,
         # Footer links are dictionaries with a "title" and "url"
         # To remove all links, run:
-        # tutor config save --set INDIGO_FOOTER_NAV_LINKS=[]
+        # tutor config save --set HDRUKFUTURESTHEME_FOOTER_NAV_LINKS=[]
         "FOOTER_NAV_LINKS": [
             {"title": "About Us", "url": "/about"},
-            {"title": "Blog", "url": "/blog"},
-            {"title": "Donate", "url": "/donate"},
             {"title": "Terms of Service", "url": "/tos"},
             {"title": "Privacy Policy", "url": "/privacy"},
             {"title": "Help", "url": "/help"},
@@ -43,21 +41,21 @@ config: t.Dict[str, t.Dict[str, t.Any]] = {
 
 # Theme templates
 hooks.Filters.ENV_TEMPLATE_ROOTS.add_item(
-    str(importlib_resources.files("tutorindigo") / "templates")
+    str(importlib_resources.files("tutorhdrukfuturestheme") / "templates")
 )
 # This is where the theme is rendered in the openedx build directory
 hooks.Filters.ENV_TEMPLATE_TARGETS.add_items(
     [
-        ("indigo", "build/openedx/themes"),
-        ("indigo/env.config.jsx", "plugins/mfe/build/mfe"),
+        ("hdrukfuturestheme", "build/openedx/themes"),
+        ("hdrukfuturestheme/env.config.jsx", "plugins/mfe/build/mfe"),
     ],
 )
 
 # Force the rendering of scss files, even though they are included in a "partials" directory
 hooks.Filters.ENV_PATTERNS_INCLUDE.add_items(
     [
-        r"indigo/lms/static/sass/partials/lms/theme/",
-        r"indigo/cms/static/sass/partials/cms/theme/",
+        r"hdrukfuturestheme/lms/static/sass/partials/lms/theme/",
+        r"hdrukfuturestheme/cms/static/sass/partials/cms/theme/",
     ]
 )
 
@@ -65,8 +63,8 @@ hooks.Filters.ENV_PATTERNS_INCLUDE.add_items(
 # init script: set theme automatically
 with open(
     os.path.join(
-        str(importlib_resources.files("tutorindigo") / "templates"),
-        "indigo",
+        str(importlib_resources.files("tutorhdrukfuturestheme") / "templates"),
+        "hdrukfuturestheme",
         "tasks",
         "init.sh",
     ),
@@ -96,16 +94,16 @@ def _override_openedx_docker_image(
 
 # Load all configuration entries
 hooks.Filters.CONFIG_DEFAULTS.add_items(
-    [(f"INDIGO_{key}", value) for key, value in config["defaults"].items()]
+    [(f"HDRUKFUTURESTHEME_{key}", value) for key, value in config["defaults"].items()]
 )
 hooks.Filters.CONFIG_UNIQUE.add_items(
-    [(f"INDIGO_{key}", value) for key, value in config["unique"].items()]
+    [(f"HDRUKFUTURESTHEME_{key}", value) for key, value in config["unique"].items()]
 )
 hooks.Filters.CONFIG_OVERRIDES.add_items(list(config["overrides"].items()))
 
 
 #  MFEs that are styled using Indigo
-indigo_styled_mfes = [
+hdruk_styled_mfes = [
     "learning",
     "learner-dashboard",
     "profile",
@@ -114,7 +112,7 @@ indigo_styled_mfes = [
 ]
 
 
-for mfe in indigo_styled_mfes:
+for mfe in hdruk_styled_mfes:
     hooks.Filters.ENV_PATCHES.add_items(
         [
             (
@@ -122,7 +120,7 @@ for mfe in indigo_styled_mfes:
                 """
 RUN npm install @edly-io/indigo-frontend-component-footer@^2.0.0
 RUN npm install '@edx/frontend-component-header@npm:@edly-io/indigo-frontend-component-header@^3.2.2'
-RUN npm install '@edx/brand@npm:@edly-io/indigo-brand-openedx@^2.2.2'
+RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdr-uk/v2.0.0'
 
 """,
             ),
@@ -139,7 +137,7 @@ const { default: IndigoFooter } = await import('@edly-io/indigo-frontend-compone
 hooks.Filters.ENV_PATCHES.add_item(
     (
         "mfe-dockerfile-post-npm-install-authn",
-        "RUN npm install '@edx/brand@npm:@edly-io/indigo-brand-openedx@^2.2.2'",
+        "RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdr-uk/v2.0.0'",
     )
 )
 
@@ -152,7 +150,7 @@ hooks.Filters.ENV_PATCHES.add_items(
             "openedx-common-assets-settings",
             """
 javascript_files = ['base_application', 'application', 'certificates_wv']
-dark_theme_filepath = ['indigo/js/dark-theme.js']
+dark_theme_filepath = ['hdrukfuturestheme/js/dark-theme.js']
 
 for filename in javascript_files:
     if filename in PIPELINE['JAVASCRIPT']:
@@ -164,29 +162,29 @@ for filename in javascript_files:
             "openedx-lms-development-settings",
             """
 javascript_files = ['base_application', 'application', 'certificates_wv']
-dark_theme_filepath = ['indigo/js/dark-theme.js']
+dark_theme_filepath = ['hdrukfuturestheme/js/dark-theme.js']
 
 for filename in javascript_files:
     if filename in PIPELINE['JAVASCRIPT']:
         PIPELINE['JAVASCRIPT'][filename]['source_filenames'] += dark_theme_filepath
 
-MFE_CONFIG['INDIGO_ENABLE_DARK_TOGGLE'] = {{ INDIGO_ENABLE_DARK_TOGGLE }}
+MFE_CONFIG['HDRUKFUTURESTHEME_ENABLE_DARK_TOGGLE'] = {{ HDRUKFUTURESTHEME_ENABLE_DARK_TOGGLE }}
 """,
         ),
         (
             "openedx-lms-production-settings",
             """
-MFE_CONFIG['INDIGO_ENABLE_DARK_TOGGLE'] = {{ INDIGO_ENABLE_DARK_TOGGLE }}
+MFE_CONFIG['HDRUKFUTURESTHEME_ENABLE_DARK_TOGGLE'] = {{ HDRUKFUTURESTHEME_ENABLE_DARK_TOGGLE }}
 """,
         ),
     ]
 )
 
 
-# Apply patches from tutor-indigo
+# Apply patches from tutor-hdrukfuturestheme
 for path in glob(
     os.path.join(
-        str(importlib_resources.files("tutorindigo") / "patches"),
+        str(importlib_resources.files("tutorhdrukfuturestheme") / "patches"),
         "*",
     )
 ):
@@ -194,7 +192,7 @@ for path in glob(
         hooks.Filters.ENV_PATCHES.add_item((os.path.basename(path), patch_file.read()))
 
 
-for mfe in indigo_styled_mfes:
+for mfe in hdruk_styled_mfes:
     PLUGIN_SLOTS.add_item(
         (
             mfe,

@@ -1,7 +1,7 @@
-Indigo, a cool blue theme for Open edX
+hdrukfuturestheme, a cool blue theme for Open edX
 ======================================
 
-Indigo is an elegant, customizable theme for `Open edX <https://openedx.org>`__.
+hdrukfuturestheme is an elegant, customizable theme for `Open edX <https://openedx.org>`__.
 
 .. image:: ./screenshots/01-landing-page.png
     :alt: Platform landing page
@@ -11,41 +11,41 @@ You can view the theme in action at https://sandbox.openedx.edly.io.
 Installation
 ------------
 
-Indigo was specially developed to be used with `Tutor <https://docs.tutor.edly.io>`__ (at least v14.0.0). If you have not installed Open edX with Tutor, then installation instructions will vary.
+hdrukfuturestheme was specially developed to be used with `Tutor <https://docs.tutor.edly.io>`__ (at least v14.0.0). If you have not installed Open edX with Tutor, then installation instructions will vary.
 
-Install and enable Indigo plugin::
+Install and enable hdrukfuturestheme plugin::
 
-    tutor plugins install indigo
-    tutor plugins enable indigo
+    tutor plugins install hdrukfuturestheme
+    tutor plugins enable hdrukfuturestheme
     tutor local launch
 
-The Indigo theme will be automatically enabled if you have not previously defined a theme. To override an existing theme, use the `settheme command <https://docs.tutor.edly.io/local.html#setting-a-new-theme>`__::
+The hdrukfuturestheme theme will be automatically enabled if you have not previously defined a theme. To override an existing theme, use the `settheme command <https://docs.tutor.edly.io/local.html#setting-a-new-theme>`__::
 
-    tutor local do settheme indigo
+    tutor local do settheme hdrukfuturestheme
 
 Configuration
 -------------
 
-- ``INDIGO_WELCOME_MESSAGE`` (default: "The place for all your online learning")
-- ``INDIGO_PRIMARY_COLOR`` (default: "#3b85ff")
-- ``INDIGO_FOOTER_NAV_LINKS`` (default: ``[{"title": "About", "url": "/about"}, {"title": "Contact", "url": "/contact"}]``)
-- ``INDIGO_ENABLE_DARK_TOGGLE`` (default: True)
+- ``HDRUKFUTURESTHEME_WELCOME_MESSAGE`` (default: "The place for all your online learning")
+- ``HDRUKFUTURESTHEME_PRIMARY_COLOR`` (default: "#3b85ff")
+- ``HDRUKFUTURESTHEME_FOOTER_NAV_LINKS`` (default: ``[{"title": "About", "url": "/about"}, {"title": "Contact", "url": "/contact"}]``)
+- ``HDRUKFUTURESTHEME_ENABLE_DARK_TOGGLE`` (default: True)
 
-The ``INDIGO_*`` settings listed above may be modified by running ``tutor config save --set INDIGO_...=...``. For instance, to remove all links from the footer, run::
+The ``HDRUKFUTURESTHEME_*`` settings listed above may be modified by running ``tutor config save --set HDRUKFUTURESTHEME_...=...``. For instance, to remove all links from the footer, run::
 
-    tutor config save --set "INDIGO_FOOTER_NAV_LINKS=[]"
+    tutor config save --set "HDRUKFUTURESTHEME_FOOTER_NAV_LINKS=[]"
 
 Or, to set the primary color to forest green, run::
 
     # Note: The nested quotes are needed in order to handle the hash (#) correctly.
-    tutor config save --set 'INDIGO_PRIMARY_COLOR="#225522"'
+    tutor config save --set 'HDRUKFUTURESTHEME_PRIMARY_COLOR="#225522"'
 
 Theme Toggle Button
 -------------------
 
-The theme toggle button is enabled by default when Tutor Indigo is installed. The theme can be switched from light to dark and vice versa. To disable it, run::
+The theme toggle button is enabled by default when Tutor hdrukfuturestheme is installed. The theme can be switched from light to dark and vice versa. To disable it, run::
 
-    tutor config save --set INDIGO_ENABLE_DARK_TOGGLE=false
+    tutor config save --set HDRUKFUTURESTHEME_ENABLE_DARK_TOGGLE=false
     tutor images build openedx
     tutor local start -d
 
@@ -55,11 +55,11 @@ Customization
 
 This plugin can serve as a starting point to create your own themes. Just fork this repository and modify the files as you see fit.
 
-You will have to start by installing indigo from source::
+You will have to start by installing hdrukfuturestheme from source::
 
-    git clone https://github.com/overhangio/tutor-indigo.git
-    pip install -e ./tutor-indigo
-    tutor plugins enable indigo
+    git clone https://github.com/overhangio/tutor-hdrukfuturestheme.git
+    pip install -e ./tutor-hdrukfuturestheme
+    tutor plugins enable hdrukfuturestheme
 
 Any change you make to the theme can be viewed immediately in development mode (with `tutor dev ...` commands) after you run::
 
@@ -73,13 +73,13 @@ To deploy your changes to production, you will have to rebuild the "openedx" Doc
 Changing the Styling in Sass files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To customize the theme stylesheets, modify the files in the ``tutorindigo/templates/indigo/lms/static/sass/`` and  ``tutorindigo/templates/indigo/cms/static/sass/`` directories. In particular, the ``_extras.scss`` files should contain most styling rules.
+To customize the theme stylesheets, modify the files in the ``tutorhdrukfuturestheme/templates/hdrukfuturestheme/lms/static/sass/`` and  ``tutorhdrukfuturestheme/templates/hdrukfuturestheme/cms/static/sass/`` directories. In particular, the ``_extras.scss`` files should contain most styling rules.
 
 
 Changing the default logo and other images
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The theme images are stored in `tutorindigo/templates/indigo/lms/static/images <https://github.com/overhangio/tutor-indigo/tree/release/tutorindigo/templates/indigo/lms/static/images>`__ for the LMS, and in `tutorindigo/templates/indigo/cms/static/images <https://github.com/overhangio/tutor-indigo/tree/release/tutorindigo/templates/indigo/cms/static/images>`__ for the CMS. To use custom images in your theme, just replace the files stored in these folders with your own.
+The theme images are stored in `tutorhdrukfuturestheme/templates/hdrukfuturestheme/lms/static/images <https://github.com/overhangio/tutor-hdrukfuturestheme/tree/release/tutorhdrukfuturestheme/templates/hdrukfuturestheme/lms/static/images>`__ for the LMS, and in `tutorhdrukfuturestheme/templates/hdrukfuturestheme/cms/static/images <https://github.com/overhangio/tutor-hdrukfuturestheme/tree/release/tutorhdrukfuturestheme/templates/hdrukfuturestheme/cms/static/images>`__ for the CMS. To use custom images in your theme, just replace the files stored in these folders with your own.
 
 Overriding the default "about", "contact", etc. static pages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -88,7 +88,7 @@ By default, the ``/about`` and ``/contact`` pages contain a simple line of text:
 
 The static templates used by Open edX to render those pages are all stored in the `edx-platform/lms/templates/static_templates <https://github.com/edx/edx-platform/tree/open-release/sumac.master/lms/templates/static_templates>`__ folder. To override those templates, you should add your own in the following folder::
 
-    ls tutorindigo/templates/indigo/lms/templates/static_templates"
+    ls tutorhdrukfuturestheme/templates/hdrukfuturestheme/lms/templates/static_templates"
 
 For instance, edit the "donate.html" file in this directory. We can derive the content of this file from the contents of the `donate.html <https://github.com/edx/edx-platform/blob/open-release/sumac.master/lms/templates/static_templates/donate.html>`__ static template in edx-platform:
 
@@ -116,10 +116,10 @@ This new template will then be used to render the /donate url.
 Troubleshooting
 ---------------
 
-Can't override styles using Indigo Theme for MFEs
+Can't override styles using hdrukfuturestheme Theme for MFEs
 -------------------------------------------------
 
-The indigo theme can’t override styles for MFEs directly. It overrides the styles for edx-platform. In case of MFEs, `@edx/brand <https://github.com/openedx/brand-openedx>`_ is used to override the styles. Customize the ``@edx/brand`` package to your preferences and include this customized package in `tutor-indigo` plugin. In this way, styles can be overidden::
+The hdrukfuturestheme theme can’t override styles for MFEs directly. It overrides the styles for edx-platform. In case of MFEs, `@edx/brand <https://github.com/openedx/brand-openedx>`_ is used to override the styles. Customize the ``@edx/brand`` package to your preferences and include this customized package in `tutor-hdrukfuturestheme` plugin. In this way, styles can be overidden::
 
 
     hooks.Filters.ENV_PATCHES.add_item((
@@ -137,4 +137,4 @@ This Tutor plugin is maintained by Ahmed Khalid and Hammad Yousaf from `Edly <ht
 License
 -------
 
-This work is licensed under the terms of the `GNU Affero General Public License (AGPL) <https://github.com/overhangio/tutor-indigo/blob/release/LICENSE.txt>`_.
+This work is licensed under the terms of the `GNU Affero General Public License (AGPL) <https://github.com/overhangio/tutor-hdrukfuturestheme/blob/release/LICENSE.txt>`_.

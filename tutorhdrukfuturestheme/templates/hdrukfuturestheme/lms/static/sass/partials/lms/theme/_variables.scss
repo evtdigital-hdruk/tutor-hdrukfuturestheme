@@ -1,10 +1,22 @@
-$primary: {{ INDIGO_PRIMARY_COLOR }};
+$hdruk-green: #3DB28C;
+$hdruk-blue: #475DA7;
+$hdruk-darkblue: #29235C;
+$hdruk-orange: #F98E2B;
+
+$primary: $hdruk-darkblue;
+$brand: $hdruk-green;
 $primary-light: #F2F7F8;
 
 // Theme fonts
 $font-family-title: 'Inter', sans-serif;
 $serif: Crimson;
-$f-sans-serif: Crimson, 'Open Sans','Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-sans-serif:  "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI",
+Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-source-sans-3: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+$f-sans-serif:  "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI",
+Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 // Initialize the Open edX Bootstrap theme
 @import 'edx-bootstrap/sass/open-edx/theme';

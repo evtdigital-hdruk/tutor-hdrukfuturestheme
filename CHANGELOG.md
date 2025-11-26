@@ -122,7 +122,7 @@ instructions, because git commits are used to generate release notes:
 
 - 💥[Improvement] Allow the no_course_image.png image to pull from the current theme, not specifically named indigo (by @misilot)
 
-- [Improvement] Remove mentions of INDIGO_FOOTER_LEGAL_LINKS in docs since it is no longer used by the plugin. (by @misilot)
+- [Improvement] Remove mentions of HDRUKFUTURESTHEME_FOOTER_LEGAL_LINKS in docs since it is no longer used by the plugin. (by @misilot)
 
 - [Improvement] Style static pages of About, Contact, Privacy and bookmarks page (by @tanveer65)
 

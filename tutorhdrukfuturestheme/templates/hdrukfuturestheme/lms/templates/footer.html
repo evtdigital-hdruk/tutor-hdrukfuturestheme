@@ -10,7 +10,7 @@
 <% footer = get_footer(is_secure=is_secure) %>
 <% icp_license_info = getattr(settings, 'ICP_LICENSE_INFO', {})%>
 <%namespace name='static' file='static_content.html'/>
-<!-- NEW IN INDIGO update footer -->
+<!-- NEW IN HDRUKFUTURESTHEME update footer -->
 % if uses_bootstrap:
 <div class="wrapper wrapper-footer">
   <footer id="footer" class="tutor-container"
@@ -42,10 +42,10 @@
         </li>
       </ul>
     </div>
-    {% if INDIGO_FOOTER_NAV_LINKS %}
+    {% if HDRUKFUTURESTHEME_FOOTER_NAV_LINKS %}
     <nav class="nav-colophon" aria-label="${_('About')}">
       <ol>
-          {% for link in INDIGO_FOOTER_NAV_LINKS %}
+          {% for link in HDRUKFUTURESTHEME_FOOTER_NAV_LINKS %}
           <li>
             <a href="{{ link['url'] }}">{{ link['title'] }}</a>
           </li>
@@ -75,7 +75,7 @@
   </footer>
 </div>
 % else:
-<!-- NEW IN INDIGO update footer -->
+<!-- NEW IN HDRUKFUTURESTHEME update footer -->
   <div class="wrapper wrapper-footer">
     <footer id="footer" class="tutor-container"
       ## When rendering the footer through the branding API,
@@ -106,10 +106,10 @@
           </li>
         </ul>
       </div>
-      {% if INDIGO_FOOTER_NAV_LINKS %}
+      {% if HDRUKFUTURESTHEME_FOOTER_NAV_LINKS %}
       <nav class="nav-colophon" aria-label="${_('About')}">
         <ol>
-            {% for link in INDIGO_FOOTER_NAV_LINKS %}
+            {% for link in HDRUKFUTURESTHEME_FOOTER_NAV_LINKS %}
             <li>
               <a href="{{ link['url'] }}">{{ link['title'] }}</a>
             </li>
