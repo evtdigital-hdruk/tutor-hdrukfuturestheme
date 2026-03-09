@@ -241,10 +241,10 @@
             <a href="{% with_link_tracking unsubscribe_url %}">{% trans "Unsubscribe from these emails" as tmsg %}{{ tmsg | force_escape }}</a>
           </td>
         </tr>
-      {% elif account_mfe_url %}
+      {% elif site_configuration_values.ACCOUNT_MICROFRONTEND_URL %}
         <tr>
           <td>
-            <a href="{% with_link_tracking account_mfe_url|add:'#marketing-preferences' %}">{% trans "Unsubscribe from these emails" as tmsg %}{{ tmsg | force_escape }}</a>
+            <a href="{% with_link_tracking site_configuration_values.ACCOUNT_MICROFRONTEND_URL|add:'#marketing-preferences' %}">{% trans "Unsubscribe from these emails" as tmsg %}{{ tmsg | force_escape }}</a>
           </td>
         </tr>
       {% endif %}
