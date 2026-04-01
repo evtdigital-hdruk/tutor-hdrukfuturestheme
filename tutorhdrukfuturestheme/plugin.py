@@ -120,7 +120,7 @@ for mfe in hdruk_styled_mfes:
                 """
 RUN npm install @edly-io/indigo-frontend-component-footer@^2.0.0
 RUN npm install '@edx/frontend-component-header@npm:@edly-io/indigo-frontend-component-header@^3.2.2'
-RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdr-uk/v2.0.0'
+RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#upgrade/to-sumac'
 
 """,
             ),
@@ -137,7 +137,7 @@ const { default: IndigoFooter } = await import('@edly-io/indigo-frontend-compone
 hooks.Filters.ENV_PATCHES.add_item(
     (
         "mfe-dockerfile-post-npm-install-authn",
-        "RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdr-uk/v2.0.0'",
+        "RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#upgrade/to-sumac'",
     )
 )
 
