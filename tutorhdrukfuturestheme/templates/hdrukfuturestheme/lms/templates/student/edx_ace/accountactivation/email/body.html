@@ -55,9 +55,9 @@
         <td>
             <p style="color: rgba(30,30,30,1);">
                 {% blocktrans trimmed asvar assist_msg %}
-                If you need help, please email {start_anchor_email}{{ support_email }}{end_anchor}.
+                If you need help, please take a look at {start_anchor_web}our help page{end_anchor}.
                 {% endblocktrans %}
-                {% interpolate_html assist_msg start_anchor_email='<a href="mailto:'|add:support_email|add:'">'|safe end_anchor='</a>'|safe %}
+                {% interpolate_html assist_msg start_anchor_web='<a href="'|add:support_url|add:'">'|safe end_anchor='</a>'|safe %}
                 <br />
             </p>
         </td>
