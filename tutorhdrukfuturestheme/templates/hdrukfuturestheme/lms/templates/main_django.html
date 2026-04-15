@@ -29,21 +29,61 @@
   {% optional_include "head-extra.html"|microsite_template_path %}
 
   {% google_analytics_4_id as ga_4_id %}
-  {% if ga_4_id %}
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_4_id }}"></script>
+
+  {% if ga_4_id or settings.GOOGLE_TAG_MANAGER_ID %}
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      gtag('set', 'developer_id.dNzMyY2', true);
+      gtag('consent', 'default', {'analytics_storage': 'denied'});
+      gtag('consent', 'default', {'ad_storage': 'denied'});
+    </script>
+  {% endif %}
 
+  {% if settings.GOOGLE_TAG_MANAGER_ID and settings.ONETRUST_CONSENT_MANAGEMENT %}
+    <script type="text/javascript">
+      function OptanonWrapper() {
+        var activeGroups = window.OnetrustActiveGroups || '';
+
+        if (activeGroups.indexOf('C0002') !== -1 && typeof window.gtag === 'function') {
+          gtag('consent', 'update', {'analytics_storage': 'granted'});
+        }
+        if (activeGroups.indexOf('C0004') !== -1 && typeof window.gtag === 'function') {
+          gtag('consent', 'update', {'ad_storage': 'granted'});
+        }
+      }
+    </script>
+  {% endif %}
+
+  {% if settings.ONETRUST_CONSENT_MANAGEMENT and settings.ONETRUST_DATA_DOMAIN_SCRIPT %}
+    <script src="https://cdn-ukwest.onetrust.com/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="{{ settings.ONETRUST_DATA_DOMAIN_SCRIPT }}"></script>
+  {% endif %}
+
+  {% if ga_4_id %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_4_id }}"></script>
+    <script>
+      gtag('js', new Date());
       gtag('config', '{{ ga_4_id }}');
     </script>
+  {% endif %}
+
+  {% if settings.GOOGLE_TAG_MANAGER_ID %}
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','{{ settings.GOOGLE_TAG_MANAGER_ID }}');</script>
   {% endif %}
 
   <meta name="path_prefix" content="{{EDX_ROOT_URL}}">
 </head>
 
 <body class="{% block bodyclass %}{% endblock %} lang_{{LANGUAGE_CODE}}">
+    {% if settings.GOOGLE_TAG_MANAGER_ID %}
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ settings.GOOGLE_TAG_MANAGER_ID }}"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    {% endif %}
+
     {% load render_bundle from webpack_loader %}
     {% render_bundle "commons" %}
   <div class="window-wrap" dir="{{LANGUAGE_BIDI|yesno:'rtl,ltr'}}">
