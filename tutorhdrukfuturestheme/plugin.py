@@ -22,17 +22,22 @@ config: t.Dict[str, t.Dict[str, t.Any]] = {
     "defaults": {
         "VERSION": __version__,
         "WELCOME_MESSAGE": "The place for all your online learning",
-        "PRIMARY_COLOR": "#15376D",  # Indigo
+        "PRIMARY_COLOR": "#2e34ba",  # Futures indigo
         "ENABLE_DARK_TOGGLE": True,
+        # NOTE: the shared `theme` cookie's domain is read from the cross-plugin
+        # `BASE_DOMAIN` config (owned by tutor-contrib-hdrukplugin) directly in
+        # dark-theme.js as `{{ BASE_DOMAIN }}`. We deliberately do NOT register a
+        # BASE_DOMAIN default here: duplicate CONFIG_DEFAULTS for the same key are
+        # resolved by plugin load order, so ownership must live in one plugin.
         # Footer links are dictionaries with a "title" and "url"
         # To remove all links, run:
         # tutor config save --set HDRUKFUTURESTHEME_FOOTER_NAV_LINKS=[]
         "FOOTER_NAV_LINKS": [
             {"title": "About Us", "url": "/about"},
-            {"title": "Terms of Service", "url": "/tos"},
-            {"title": "Privacy Policy", "url": "/privacy"},
+            {"title": "Terms of Service", "url": "/terms-of-service"},
+            {"title": "Privacy Policy", "url": "/privacy-policy"},
             {"title": "Help", "url": "/help"},
-            {"title": "Contact Us", "url": "/contact"},
+            {"title": "Contact Us", "url": "/help"},
         ],
     },
     "unique": {},
@@ -47,7 +52,6 @@ hooks.Filters.ENV_TEMPLATE_ROOTS.add_item(
 hooks.Filters.ENV_TEMPLATE_TARGETS.add_items(
     [
         ("hdrukfuturestheme", "build/openedx/themes"),
-        ("hdrukfuturestheme/env.config.jsx", "plugins/mfe/build/mfe"),
     ],
 )
 
