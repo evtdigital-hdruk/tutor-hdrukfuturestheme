@@ -1,23 +1,24 @@
-$hdruk-green: #3DB28C;
-$hdruk-blue: #475DA7;
-$hdruk-darkblue: #29235C;
+$hdruk-green: #0adec8;
+$hdruk-blue: #2e34ba;
+$hdruk-darkblue: #2e34ba;
 $hdruk-orange: #F98E2B;
 
 $primary: $hdruk-darkblue;
 $brand: $hdruk-green;
-$primary-light: #F2F7F8;
+$primary-light: #f5f2eb;
 
 // Theme fonts
-$font-family-title: 'Inter', sans-serif;
+$font-family-title: 'gravita-geo-variable', 'Gravita GEO', sans-serif;
 $serif: Crimson;
-$font-family-sans-serif:  "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI",
+$font-family-sans-serif:  "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
 Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
 "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-$font-source-sans-3: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-$f-sans-serif:  "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI",
+$font-source-sans-3: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+$f-sans-serif:  "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
 Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
 "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://use.typekit.net/tsf6xgt.css');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 // Initialize the Open edX Bootstrap theme
 @import 'edx-bootstrap/sass/open-edx/theme';
 
@@ -32,19 +33,19 @@ $big-screen: 1200px;
 
 // Introducing dark-theme variables
 
-$primary-d: #AEC7F6;
-$primary-light-d: #292A2C;
+$primary-d: #0adec8;
+$primary-light-d: #26272a;
 $gray-light: #E5E7EB;
 $gray-lighter: #c8c8c8;
 $light-dark-d: #374151;
-$text-color-d: #F8F8F8;
+$text-color-d: #f5f2eb;
 $text-color-primary: #DDDFE2;
 $border-color-d: #777792;
 $light-overlay-d: #36383B;
 $danger-d: #FFA07A;
 $success-d: #54CF5E;
 $btn-color-d: #112F6B;
-$body-bg-d: #0D0D0E;
+$body-bg-d: #1e1f1d;
 
 $instructor-input-border-color: $gray-lighter;
 
