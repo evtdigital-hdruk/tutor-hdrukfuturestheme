@@ -146,7 +146,8 @@ hooks.Filters.ENV_PATCHES.add_items(
             "openedx-common-assets-settings",
             """
 javascript_files = ['base_application', 'application', 'certificates_wv']
-dark_theme_filepath = ['hdrukfuturestheme/js/dark-theme.js']
+# theme-core.js MUST precede dark-theme.js
+dark_theme_filepath = ['hdrukfuturestheme/js/theme-core.js', 'hdrukfuturestheme/js/dark-theme.js']
 
 for filename in javascript_files:
     if filename in PIPELINE['JAVASCRIPT']:
@@ -158,7 +159,8 @@ for filename in javascript_files:
             "openedx-lms-development-settings",
             """
 javascript_files = ['base_application', 'application', 'certificates_wv']
-dark_theme_filepath = ['hdrukfuturestheme/js/dark-theme.js']
+# theme-core.js MUST precede dark-theme.js
+dark_theme_filepath = ['hdrukfuturestheme/js/theme-core.js', 'hdrukfuturestheme/js/dark-theme.js']
 
 for filename in javascript_files:
     if filename in PIPELINE['JAVASCRIPT']:

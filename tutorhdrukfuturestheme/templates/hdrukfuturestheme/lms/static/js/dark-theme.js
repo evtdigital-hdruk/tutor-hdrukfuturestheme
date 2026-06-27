@@ -1,14 +1,15 @@
 $(document).ready(function() {
     'use strict';
 
-    // Mirrors the conventions in the MFE helper (hdruk-frontend-plugin-slots
-    // src/theme.js): same `theme` cookie ('dark' | 'light'), shared base domain,
-    // 1-year max-age, samesite=lax. This file is concatenated into the LMS via
-    // Django Pipeline (no module bundler), so it uses raw document.cookie + the
-    // global jQuery rather than universal-cookie / getConfig().
-    const THEME_COOKIE = 'theme';
-    const LIGHT = 'light';
-    const DARK = 'dark';
+    // Pure cookie/theme logic lives in theme-core.js (concatenated by Pipeline
+    // before this file; exposes window.HdrukThemeCore) so it can be unit-tested.
+    // It mirrors hdruk-frontend-plugin-slots src/theme-core.js: same `theme`
+    // cookie ('dark' | 'light'), shared base domain, 1-year max-age, samesite=lax.
+    // This file keeps the jQuery / DOM glue that Pipeline can't bundle-test.
+    const core = window.HdrukThemeCore;
+    const THEME_COOKIE = core.THEME_COOKIE;
+    const LIGHT = core.LIGHT;
+    const DARK = core.DARK;
     const ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
     // Base domain so the cookie is shared with the MFEs and marketing site (the
     // MFE side reads getConfig().SESSION_COOKIE_DOMAIN). `BASE_DOMAIN` is the
@@ -18,19 +19,11 @@ $(document).ready(function() {
     const themeCookieDomain = '{{ BASE_DOMAIN | default("") }}';
 
     function getStoredTheme(){
-      const match = document.cookie.match(/(?:^|; )theme=(dark|light)/);
-      if (match) {
-        return match[1];
-      }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? DARK : LIGHT;
+      return core.resolveActiveTheme(document.cookie);
     }
 
     function storeTheme(value){
-      let cookie = THEME_COOKIE + '=' + value + '; path=/; max-age=' + ONE_YEAR_SECONDS + '; samesite=lax';
-      if (themeCookieDomain) {
-        cookie += '; domain=' + themeCookieDomain;
-      }
-      document.cookie = cookie;
+      document.cookie = core.buildThemeCookie(THEME_COOKIE, value, ONE_YEAR_SECONDS, themeCookieDomain);
     }
 
     function applyThemeOnPage(){

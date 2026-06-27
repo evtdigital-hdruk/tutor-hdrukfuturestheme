@@ -4,7 +4,10 @@ SRC_DIRS = ./hdrukfuturestheme
 BLACK_OPTS = --exclude templates ${SRC_DIRS}
 
 # Warning: These checks are not necessarily run on every PR.
-test: test-lint test-types test-format  # Run some static checks.
+test: test-lint test-types test-format test-js  # Run some static checks.
+
+test-js: ## Unit-test the LMS theme-core.js (node built-in runner, zero deps)
+	node --test 'tests/**/*.test.mjs'
 
 test-format: ## Run code formatting tests
 	black --check --diff $(BLACK_OPTS)
