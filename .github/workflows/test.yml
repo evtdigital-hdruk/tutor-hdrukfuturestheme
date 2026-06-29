@@ -1,10 +1,10 @@
 name: Run tests
 
+# Run on every branch so the ES5 lint (and other static checks) gate feature
+# branches before the slow Open edX Docker image build, not just release/main.
 on:
   pull_request:
-    branches: [ release, main ]
   push:
-    branches: [ release, main ]
 
 jobs:
   tests:

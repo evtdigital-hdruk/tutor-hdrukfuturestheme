@@ -4,10 +4,13 @@ SRC_DIRS = ./hdrukfuturestheme
 BLACK_OPTS = --exclude templates ${SRC_DIRS}
 
 # Warning: These checks are not necessarily run on every PR.
-test: test-lint test-types test-format test-js  # Run some static checks.
+test: test-lint test-types test-format test-js test-js-es5  # Run some static checks.
 
 test-js: ## Unit-test the LMS theme-core.js (node built-in runner, zero deps)
 	node --test 'tests/**/*.test.mjs'
+
+test-js-es5: ## Lint theme JS as ES5 (Open edX pipeline compresses it with ES5-only uglify-js)
+	sh tests/lint-es5.sh
 
 test-format: ## Run code formatting tests
 	black --check --diff $(BLACK_OPTS)
