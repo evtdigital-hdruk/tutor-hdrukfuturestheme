@@ -4,6 +4,26 @@
 <html lang="{{LANGUAGE_CODE}}">
 <head>
   <meta charset="UTF-8">
+{% endraw %}{% if HDRUKFUTURESTHEME_ENABLE_DARK_TOGGLE %}{% raw %}
+  <script type="text/javascript">
+    /* FOUC guard (kept in sync with main.html): apply the persisted/preferred
+       theme to <html> before paint so dark pages don't flash light before
+       dark-theme.js runs. Self-contained; mirrors theme-core.js. */
+    (function () {
+      try {
+        var match = document.cookie.match(/(?:^|; )theme=(dark|light)/);
+        var theme = match
+          ? match[1]
+          : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light');
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) { /* cookie / matchMedia unavailable - ignore */ }
+    })();
+  </script>
+{% endraw %}{% endif %}{% raw %}
   <title>{% block title %}{{ platform_name }}{% endblock %}</title>
 
   <link rel="icon" type="image/x-icon" href="{% favicon_path %}" />
