@@ -30,11 +30,11 @@
 
 {% google_analytics_tracking_pixel %}
 
-<div bgcolor="#f5f5f5" lang="{{ LANGUAGE_CODE|default:"en" }}" dir="{{ LANGUAGE_BIDI|yesno:"rtl,ltr" }}" style="
+<div bgcolor="#f5f2eb" lang="{{ LANGUAGE_CODE|default:"en" }}" dir="{{ LANGUAGE_BIDI|yesno:"rtl,ltr" }}" style="
   margin: 0;
   padding: 0;
   min-width: 100%;
-  background-color: #f5f5f5;
+  background-color: #f5f2eb;
   ">
   <!-- Hack for outlook 2010, which wants to render everything in Times New Roman -->
   <!--[if mso]>
@@ -50,7 +50,7 @@
   <![endif]-->
 
   <!-- CONTENT -->
-  <table class="content" role="presentation" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#fbfaf9" width="100%"
+  <table class="content" role="presentation" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#f5f2eb" width="100%"
     {% block table_style %}
       style="
       font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -62,14 +62,14 @@
     {% endblock %}
   >
     {% block header %}
-      <td class="header" style="background-color: #f5f5f5;">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#F5F5F5">
+      <td class="header" style="background-color: #f5f2eb;">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#f5f2eb">
           <tr>
             <td valign="top" align="center">
               <table width="600" cellpadding="0" cellspacing="0" align="center" class="width_100percent">
                 <tr>
                   <td valign="top" align="center" style="min-width:600px;" class="min_width">
-                    <table width="100%" cellpadding="0" cellspacing="0" bgcolor="#F5F5F5">
+                    <table width="100%" cellpadding="0" cellspacing="0" bgcolor="#f5f2eb">
                       <tr><td height="10" style="line-height:1px;">&nbsp;</td></tr>
                       <tr>
                         <td align="left" valign="top" style="padding:0 60px;" class="padding_none">
@@ -92,7 +92,7 @@
                               <td align="center" valign="middle" class="paddingtop_10">
                                 <table cellpadding="0" cellspacing="0">
                                   <tr>
-                                    <td align="left" valign="top" style="color: #d23228;">
+                                    <td align="left" valign="top" style="color: #2e34ba;">
                                       {% if courses_url %}
                                         <a href="{% with_link_tracking courses_url %}" target="_blank" style="font-family:'Inter',Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;text-decoration:none;color:#000001;font-weight:bold;">
                                           {% trans "Courses" as tmsg %}{{ tmsg | force_escape }}
@@ -143,7 +143,7 @@
 
 <tr>
   <!-- FOOTER -->
-  <td class="footer" style="padding: 20px; background-color: #f5f5f5;">
+  <td class="footer" style="padding: 20px; background-color: #f5f2eb;">
     <table role="presentation" width="100%" align="left" border="0" cellpadding="0" cellspacing="0">
       <tr>
         <td style="padding-bottom: 20px;">
@@ -215,12 +215,12 @@
       </tr>
       <tr>
         <!-- Actions -->
-        <td style="padding-bottom: 20px; background-color: #f5f5f5;">
+        <td style="padding-bottom: 20px; background-color: #f5f2eb;">
           {% get_action_links channel omit_unsubscribe_link=omit_unsubscribe_link as action_links %}
           {% for action_link_url, action_link_text in action_links %}
             <p>
-              <a href="{{ action_link_url }}" style="color: #005686">
-                <font color="#005686"><b>{{ action_link_text }}</b></font>
+              <a href="{{ action_link_url }}" style="color: #2e34ba">
+                <font color="#2e34ba"><b>{{ action_link_text }}</b></font>
               </a>
             </p>
           {% endfor %}
