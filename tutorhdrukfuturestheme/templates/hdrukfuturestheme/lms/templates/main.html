@@ -34,6 +34,29 @@ from common.djangoapps.pipeline_mako import render_require_js_path_overrides
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+{% if HDRUKFUTURESTHEME_ENABLE_DARK_TOGGLE %}
+    <script type="text/javascript">
+      /* FOUC guard: apply the persisted/preferred theme to <html> before paint
+         so dark pages don't flash light before dark-theme.js runs on DOM ready.
+         Self-contained (dark-theme.js / theme-core.js load later via Pipeline);
+         mirrors theme-core.js resolveActiveTheme. dark-theme.js also adds `.dark`
+         to <body> on ready for the body-scoped courseware rules. */
+      (function () {
+        try {
+          var match = document.cookie.match(/(?:^|; )theme=(dark|light)/);
+          var theme = match
+            ? match[1]
+            : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light');
+          if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) { /* cookie / matchMedia unavailable - ignore */ }
+      })();
+    </script>
+{% endif %}
+
 ## Define a couple of helper functions to make life easier when
 ## embedding theme conditionals into templates. All inheriting
 ## templates have access to these functions, and we can import these

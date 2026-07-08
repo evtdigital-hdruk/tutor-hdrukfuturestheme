@@ -34,8 +34,9 @@ header.global-header {
                 margin: 20px 0 0;
             }
             .logo {
-                height: 24px;
+                height: 44px; // match the marketing site / MFE header logo
                 margin: 0;
+                padding: 0;
             }
         }
         .course-header {
@@ -264,7 +265,7 @@ header.global-header {
 
 
 
-body.indigo-dark-theme {
+.dark {
     background: $body-bg-d !important;
     color: $text-color-d !important;
     .window-wrap {

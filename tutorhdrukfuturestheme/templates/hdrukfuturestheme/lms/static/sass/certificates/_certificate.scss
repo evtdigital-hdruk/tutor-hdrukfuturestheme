@@ -36,7 +36,7 @@ body.certificate {
             }
         }
     }
-    &.indigo-dark-theme {
+    .dark & {
         background: $body-bg-d;
         color: $text-color-d;
         .banner-user .message-actions .action {
@@ -61,7 +61,7 @@ body.certificate {
     }
 }
 @media print {
-    body.indigo-dark-theme.certificate {
+    .dark body.certificate {
         background: white;
         color: black;
         &.layout-accomplishment.certificate-honor .accomplishment-main {
