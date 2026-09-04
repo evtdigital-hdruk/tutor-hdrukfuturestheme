@@ -55,11 +55,13 @@ hooks.Filters.ENV_TEMPLATE_TARGETS.add_items(
     ],
 )
 
-# Force the rendering of scss files, even though they are included in a "partials" directory
+# Force the rendering of scss files, even though they are included in a "partials" directory.
+# There is no cms/ tree any more: on Teak, Studio is the authoring MFE, which takes
+# its branding from MFE_CONFIG (LOGO_URL / FAVICON_URL), so the legacy CMS SCSS and
+# images were removed with the Teak upgrade.
 hooks.Filters.ENV_PATTERNS_INCLUDE.add_items(
     [
         r"hdrukfuturestheme/lms/static/sass/partials/lms/theme/",
-        r"hdrukfuturestheme/cms/static/sass/partials/cms/theme/",
     ]
 )
 

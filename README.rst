@@ -73,13 +73,13 @@ To deploy your changes to production, you will have to rebuild the "openedx" Doc
 Changing the Styling in Sass files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To customize the theme stylesheets, modify the files in the ``tutorhdrukfuturestheme/templates/hdrukfuturestheme/lms/static/sass/`` and  ``tutorhdrukfuturestheme/templates/hdrukfuturestheme/cms/static/sass/`` directories. In particular, the ``_extras.scss`` files should contain most styling rules.
+To customize the theme stylesheets, modify the files in the ``tutorhdrukfuturestheme/templates/hdrukfuturestheme/lms/static/sass/`` directory. In particular, the ``_extras.scss`` file should contain most styling rules. There is no CMS stylesheet: on Teak, Studio is the authoring MFE and is branded through ``MFE_CONFIG``.
 
 
 Changing the default logo and other images
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The theme images are stored in `tutorhdrukfuturestheme/templates/hdrukfuturestheme/lms/static/images <https://github.com/overhangio/tutor-hdrukfuturestheme/tree/release/tutorhdrukfuturestheme/templates/hdrukfuturestheme/lms/static/images>`__ for the LMS, and in `tutorhdrukfuturestheme/templates/hdrukfuturestheme/cms/static/images <https://github.com/overhangio/tutor-hdrukfuturestheme/tree/release/tutorhdrukfuturestheme/templates/hdrukfuturestheme/cms/static/images>`__ for the CMS. To use custom images in your theme, just replace the files stored in these folders with your own.
+The theme images are stored in ``tutorhdrukfuturestheme/templates/hdrukfuturestheme/lms/static/images``. The LMS serves them to the MFEs (including Studio) through ``/theming/asset/images/...``, so replacing the files in that folder rebrands everything.
 
 Overriding the default "about", "contact", etc. static pages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
