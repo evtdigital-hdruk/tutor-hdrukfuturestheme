@@ -228,6 +228,22 @@
     }
   }
 
+  .certificate-logo {
+    filter: brightness(0) invert(1);
+  }
+
+  .certificate-cpd-logo {
+    background: #ffffff;
+    padding: 4px;
+    border-radius: 8px;
+  }
+
+  .certificate-logos-container {
+    background: #ffffff;
+    padding: 8px;
+    border-radius: 8px;
+  }
+
   .signature-image-container {
     img {
       filter: invert(1);
