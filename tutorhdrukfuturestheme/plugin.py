@@ -24,6 +24,13 @@ config: t.Dict[str, t.Dict[str, t.Any]] = {
         "WELCOME_MESSAGE": "The place for all your online learning",
         "PRIMARY_COLOR": "#2e34ba",  # Futures indigo
         "ENABLE_DARK_TOGGLE": True,
+        # Runtime Paragon theme (Ulmo, Paragon 23 design tokens). The MFEs load
+        # the brand's built CSS from this base URL at runtime instead of
+        # compiling @edx/brand SCSS into every image. Point it at a jsDelivr
+        # URL for a brand-hdruk *tag* (never a branch: jsDelivr caches branch
+        # URLs for up to 12 hours and production pins tags only). A brand
+        # change is then a new tag plus a config save, not an MFE rebuild.
+        "PARAGON_THEME_BASE_URL": "https://cdn.jsdelivr.net/gh/evtdigital-hdruk/brand-hdruk@hdr-uk/v4.0.0/dist",
         # NOTE: the shared `theme` cookie's domain is read from the cross-plugin
         # `BASE_DOMAIN` config (owned by tutor-contrib-hdrukplugin) directly in
         # dark-theme.js as `{{ BASE_DOMAIN }}`. We deliberately do NOT register a
@@ -124,7 +131,7 @@ for mfe in hdruk_styled_mfes:
             (
                 f"mfe-dockerfile-post-npm-install-{mfe}",
                 """
-RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdr-uk/v3.1.0'
+RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdr-uk/v4.0.0'
 
 """,
             )
@@ -135,7 +142,7 @@ RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.
 hooks.Filters.ENV_PATCHES.add_item(
     (
         "mfe-dockerfile-post-npm-install-authn",
-        "RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdr-uk/v3.1.0'",
+        "RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdr-uk/v4.0.0'",
     )
 )
 
@@ -178,6 +185,44 @@ MFE_CONFIG['HDRUKFUTURESTHEME_ENABLE_DARK_TOGGLE'] = {{ HDRUKFUTURESTHEME_ENABLE
 """,
         ),
     ]
+)
+
+
+# Runtime Paragon theme URLs, read by @edx/frontend-platform in every MFE
+# (Paragon 23+). No "core.urls.default" is given on purpose: frontend-platform
+# then falls back to the Paragon core CSS compiled into the image, which is
+# guaranteed to match the MFE's Paragon version, and only the brand layers
+# (core override with the fonts, and the light and dark variants) come from
+# the brand-hdruk build on jsDelivr. The @edx/brand npm install above stays
+# as the local fallback frontend-platform uses when a URL fails to load.
+hooks.Filters.ENV_PATCHES.add_item(
+    (
+        "mfe-lms-common-settings",
+        """
+MFE_CONFIG["PARAGON_THEME_URLS"] = {
+    "core": {
+        "urls": {
+            "brandOverride": "{{ HDRUKFUTURESTHEME_PARAGON_THEME_BASE_URL }}/core.min.css",
+        },
+    },
+    "defaults": {"light": "light", "dark": "dark"},
+    "variants": {
+        "light": {
+            "urls": {
+                "default": "{{ HDRUKFUTURESTHEME_PARAGON_THEME_BASE_URL }}/light.min.css",
+                "brandOverride": "{{ HDRUKFUTURESTHEME_PARAGON_THEME_BASE_URL }}/light.min.css",
+            },
+        },
+        "dark": {
+            "urls": {
+                "default": "{{ HDRUKFUTURESTHEME_PARAGON_THEME_BASE_URL }}/dark.min.css",
+                "brandOverride": "{{ HDRUKFUTURESTHEME_PARAGON_THEME_BASE_URL }}/dark.min.css",
+            },
+        },
+    },
+}
+""",
+    )
 )
 
 
