@@ -1,21 +1,42 @@
 
-// Read the persisted theme from the base-domain `theme` cookie (shared across
-// the LMS, MFEs and marketing site), falling back to the OS preference.
-const getActiveThemeFromCookie = () => {
-  const match = document.cookie.match(/(?:^|; )theme=(dark|light)/);
-  if (match) {
-    return match[1];
-  }
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-};
-
-// FOUC guard: apply the persisted/preferred theme synchronously as this config
-// module is evaluated (before React renders), so content paints dark from the
-// first frame rather than flashing light then switching in an effect.
-(function applyInitialTheme() {
+// Theme bootstrap for the Paragon runtime theme (frontend-platform 8+).
+//
+// env.config is evaluated inside initialize(), before AppProvider picks the
+// theme variant, so this runs early enough to do two things the app cannot:
+//
+//  1. Copy a choice persisted only in the base-domain `theme` cookie (set on
+//     the LMS pages or the marketing site) into frontend-platform's
+//     localStorage key, the only store it reads at boot. Without this the MFE
+//     boots light, renders, and only then switches to dark. The cookie wins
+//     over localStorage; the OS preference is the fallback when neither is set.
+//  2. Mark <html> with the variant and paint the page in that variant's
+//     colours while the variant stylesheets are still loading, so the empty
+//     document does not show white first.
+//
+// The slots package (theme.js) keeps the two stores in step from then on.
+(function bootstrapParagonTheme() {
   try {
-    document.documentElement.classList.toggle('dark', getActiveThemeFromCookie() === 'dark');
+    var KEY = 'selected-paragon-theme-variant';
+    var isVariant = function (v) { return v === 'dark' || v === 'light'; };
+    var cookieMatch = document.cookie.match(/(?:^|; )theme=(dark|light)/);
+    var stored = null;
+    try { stored = window.localStorage.getItem(KEY); } catch (e) { /* storage blocked */ }
+    var persisted = cookieMatch ? cookieMatch[1] : (isVariant(stored) ? stored : null);
+    if (persisted && stored !== persisted) {
+      try { window.localStorage.setItem(KEY, persisted); } catch (e) { /* storage blocked */ }
+    }
+    var prefersDark = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    var active = persisted || (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-paragon-theme-variant', active);
+    if (!document.getElementById('hdruk-theme-prepaint')) {
+      var style = document.createElement('style');
+      style.id = 'hdruk-theme-prepaint';
+      // Futures ink / cream, matching the brand's page background tokens.
+      style.textContent = 'html[data-paragon-theme-variant="dark"]{background-color:#1e1f1d;color:#f5f2eb}'
+        + 'html[data-paragon-theme-variant="light"]{background-color:#f5f2eb;color:#1e1f1d}';
+      document.head.appendChild(style);
+    }
   } catch (e) {
-    // cookie / matchMedia unavailable - ignore.
+    // No DOM (tests, SSR) - nothing to do.
   }
 })();

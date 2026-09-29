@@ -189,12 +189,16 @@ MFE_CONFIG['HDRUKFUTURESTHEME_ENABLE_DARK_TOGGLE'] = {{ HDRUKFUTURESTHEME_ENABLE
 
 
 # Runtime Paragon theme URLs, read by @edx/frontend-platform in every MFE
-# (Paragon 23+). No "core.urls.default" is given on purpose: frontend-platform
-# then falls back to the Paragon core CSS compiled into the image, which is
-# guaranteed to match the MFE's Paragon version, and only the brand layers
-# (core override with the fonts, and the light and dark variants) come from
-# the brand-hdruk build on jsDelivr. The @edx/brand npm install above stays
-# as the local fallback frontend-platform uses when a URL fails to load.
+# (Paragon 23+). For each variant the MFE loads two stylesheets: "default",
+# Paragon's own complete variable set, and "brandOverride", the brand's
+# overrides on top. Paragon publishes only a light variant, so both of our
+# variants use Paragon's light CSS as their default and differ only in the
+# brand file. "$paragonVersion" is substituted at runtime with the Paragon
+# version compiled into the MFE, so the default always matches. No
+# "core.urls.default" is given on purpose: frontend-platform then uses the
+# Paragon core CSS compiled into the image. Only the brand layers come from
+# brand-hdruk's build on jsDelivr. The @edx/brand npm install above stays as
+# the local fallback frontend-platform uses when a URL fails to load.
 hooks.Filters.ENV_PATCHES.add_item(
     (
         "mfe-lms-common-settings",
@@ -209,13 +213,13 @@ MFE_CONFIG["PARAGON_THEME_URLS"] = {
     "variants": {
         "light": {
             "urls": {
-                "default": "{{ HDRUKFUTURESTHEME_PARAGON_THEME_BASE_URL }}/light.min.css",
+                "default": "https://cdn.jsdelivr.net/npm/@openedx/paragon@$paragonVersion/dist/light.min.css",
                 "brandOverride": "{{ HDRUKFUTURESTHEME_PARAGON_THEME_BASE_URL }}/light.min.css",
             },
         },
         "dark": {
             "urls": {
-                "default": "{{ HDRUKFUTURESTHEME_PARAGON_THEME_BASE_URL }}/dark.min.css",
+                "default": "https://cdn.jsdelivr.net/npm/@openedx/paragon@$paragonVersion/dist/light.min.css",
                 "brandOverride": "{{ HDRUKFUTURESTHEME_PARAGON_THEME_BASE_URL }}/dark.min.css",
             },
         },
