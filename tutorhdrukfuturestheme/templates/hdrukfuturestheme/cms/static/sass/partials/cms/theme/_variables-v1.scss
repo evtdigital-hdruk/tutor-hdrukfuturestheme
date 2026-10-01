@@ -1,0 +1,12 @@
+// Studio compiles its stylesheets once more for every theme, into
+// <theme>/cms/static/css/, even when the theme has no Studio styles of its
+// own, and Django then serves that copy instead of the stock one. Upstream
+// sets $static-path to '..', relative to the stylesheet, so the themed copy
+// looks for images and fonts under /static/studio/hdrukfuturestheme/, which
+// does not exist. On Ulmo the unit page draws the edit pencil and the drag
+// handles from masked SVGs under that path, so they vanished. Point the
+// themed copy at the stock Studio assets instead. Upstream's own value is
+// declared with !default, so it has to be set before the import.
+$static-path: '/static/studio';
+
+@import 'cms/static/sass/partials/cms/theme/variables-v1';
