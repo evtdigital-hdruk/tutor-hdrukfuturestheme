@@ -30,7 +30,7 @@ config: t.Dict[str, t.Dict[str, t.Any]] = {
         # URL for a brand-hdruk *tag* (never a branch: jsDelivr caches branch
         # URLs for up to 12 hours and production pins tags only). A brand
         # change is then a new tag plus a config save, not an MFE rebuild.
-        "PARAGON_THEME_BASE_URL": "https://cdn.jsdelivr.net/gh/evtdigital-hdruk/brand-hdruk@hdr-uk/v4.0.0/dist",
+        "PARAGON_THEME_BASE_URL": "https://cdn.jsdelivr.net/gh/evtdigital-hdruk/brand-hdruk@hdr-uk/v4.0.0-beta/dist",
         # NOTE: the shared `theme` cookie's domain is read from the cross-plugin
         # `BASE_DOMAIN` config (owned by tutor-contrib-hdrukplugin) directly in
         # dark-theme.js as `{{ BASE_DOMAIN }}`. We deliberately do NOT register a
@@ -133,7 +133,7 @@ for mfe in hdruk_styled_mfes:
             (
                 f"mfe-dockerfile-post-npm-install-{mfe}",
                 """
-RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdr-uk/v4.0.0'
+RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdr-uk/v4.0.0-beta'
 
 """,
             )
@@ -144,7 +144,7 @@ RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.
 hooks.Filters.ENV_PATCHES.add_item(
     (
         "mfe-dockerfile-post-npm-install-authn",
-        "RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdr-uk/v4.0.0'",
+        "RUN npm install '@edx/brand@git+https://github.com/evtdigital-hdruk/brand-hdruk.git#hdr-uk/v4.0.0-beta'",
     )
 )
 
