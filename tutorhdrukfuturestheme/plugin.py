@@ -40,7 +40,7 @@ config: t.Dict[str, t.Dict[str, t.Any]] = {
         # To remove all links, run:
         # tutor config save --set HDRUKFUTURESTHEME_FOOTER_NAV_LINKS=[]
         "FOOTER_NAV_LINKS": [
-            {"title": "About Us", "url": "/about"},
+            {"title": "About Us", "url": "/about-us"},
             {"title": "Terms of Service", "url": "/terms-of-service"},
             {"title": "Privacy Policy", "url": "/privacy-policy"},
             {"title": "Help", "url": "/help"},
